@@ -40,3 +40,62 @@ form.addEventListener('submit',e=>{
   setTimeout(()=>toast.classList.remove('show'),4000);
   form.reset();
 });
+
+// --- Gallery Filtering ---
+const filterBtns = document.querySelectorAll('.filter-btn');
+const galleryItems = document.querySelectorAll('.gallery-grid .g-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.getAttribute('data-filter');
+
+    galleryItems.forEach(item => {
+      const category = item.getAttribute('data-category');
+      if (filter === 'all' || category === filter) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// --- Lightbox Modal ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const lightboxClose = document.getElementById('lightbox-close');
+
+galleryItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const src = item.getAttribute('data-src') || item.querySelector('img').src;
+    const title = item.getAttribute('data-title') || item.querySelector('img').alt;
+    lightboxImg.src = src;
+    lightboxImg.alt = title;
+    lightboxCaption.textContent = title;
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+  });
+});
+
+const closeLightbox = () => {
+  if (lightbox) {
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+  }
+};
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+    closeLightbox();
+  }
+});
