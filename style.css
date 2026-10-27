@@ -40,12 +40,19 @@ html {
   font-size: 16px;
 }
 
-body {
+/* Custom Electric Lightning Cursor (Default & Interactive) */
+html, body {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22glow%22%20x%3D%22-50%25%22%20y%3D%22-50%25%22%20width%3D%22200%25%22%20height%3D%22200%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%220%22%20stdDeviation%3D%221%22%20flood-color%3D%22%2310b981%22%20flood-opacity%3D%220.9%22%2F%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%220%22%20stdDeviation%3D%222.5%22%20flood-color%3D%22%23f59e0b%22%20flood-opacity%3D%220.8%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpolygon%20points%3D%223%2C2%2014%2C14%208%2C14%2019%2C29%2010%2C16%2016%2C16%22%20fill%3D%22rgba(0%2C0%2C0%2C0.5)%22%2F%3E%3Cpolygon%20points%3D%222%2C1%2013%2C13%207%2C13%2018%2C28%209%2C15%2015%2C15%22%20fill%3D%22%23f59e0b%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%221%22%20filter%3D%22url(%23glow)%22%2F%3E%3Cpolygon%20points%3D%223%2C3%2011%2C12%208%2C12%2016%2C24%2010%2C14%2013%2C14%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.9%22%2F%3E%3C%2Fsvg%3E") 2 1, auto;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-main);
   background-color: var(--bg-body);
   line-height: 1.65;
   overflow-x: hidden;
+}
+
+/* Energized High-Voltage Cursor on Hover */
+a, button, .bento-item, .filter-pill, input, select, textarea, label, [role="button"], .tab-btn, .about-tab-btn, .lightbox-nav-btn, .lightbox-close, .floating-whatsapp, #scroll-top, .hero-dossier-pill, .btn-primary, .btn-secondary {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22glow-hover%22%20x%3D%22-50%25%22%20y%3D%22-50%25%22%20width%3D%22200%25%22%20height%3D%22200%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%220%22%20stdDeviation%3D%221.5%22%20flood-color%3D%22%2338bdf8%22%20flood-opacity%3D%221%22%2F%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%220%22%20stdDeviation%3D%223%22%20flood-color%3D%22%23f59e0b%22%20flood-opacity%3D%220.9%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpolygon%20points%3D%223%2C2%2015%2C15%209%2C15%2020%2C30%2011%2C17%2017%2C17%22%20fill%3D%22rgba(0%2C0%2C0%2C0.6)%22%2F%3E%3Cpolygon%20points%3D%222%2C1%2014%2C14%208%2C14%2019%2C29%2010%2C16%2016%2C16%22%20fill%3D%22%2310b981%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%221.2%22%20filter%3D%22url(%23glow-hover)%22%2F%3E%3Cpolygon%20points%3D%223%2C3%2012%2C13%208%2C13%2017%2C25%2011%2C15%2014%2C15%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%222%22%20cy%3D%221%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fsvg%3E") 2 1, pointer !important;
 }
 
 /* Custom Scrollbar */
@@ -346,6 +353,29 @@ nav ul a:hover, nav ul a.active {
   height: 480px;
   background: radial-gradient(circle, rgba(245, 158, 11, 0.14) 0%, transparent 70%);
   pointer-events: none;
+}
+
+/* Background Lightning & Atmospheric Canvas */
+.lightning-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.95;
+}
+
+/* Global Electric Touch & Click Spark Canvas */
+.electric-spark-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
 }
 
 .hero-container {

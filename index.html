@@ -69,6 +69,8 @@
   <section id="hero">
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
+    <!-- Ambient Electricity & Background Lightning Canvas -->
+    <canvas id="lightning-canvas" class="lightning-canvas" aria-hidden="true"></canvas>
     <div class="hero-container">
       <div class="hero-content">
         <a href="#dossier-intro" class="hero-dossier-pill">
@@ -97,8 +99,8 @@
             <span>A Norma di Legge</span>
           </div>
           <div class="hero-stat-card">
-            <strong>14+</strong>
-            <span>Grandi Cantieri Documentati</span>
+            <strong>69+</strong>
+            <span>Progetti Documentati</span>
           </div>
           <div class="hero-stat-card">
             <strong>24h</strong>
@@ -749,282 +751,778 @@
         </p>
       </div>
 
-      <!-- Filter Pills -->
+            <!-- Filter Pills -->
       <div class="project-filters">
-        <button class="filter-pill active" data-filter="all">Tutti i Progetti (24)</button>
-        <button class="filter-pill" data-filter="civile">Impianti Civili & Residenziali (10)</button>
-        <button class="filter-pill" data-filter="logistica">Grandi Cantieri & Logistica (3)</button>
-        <button class="filter-pill" data-filter="quota">Lavori in Quota & Passerelle (5)</button>
-        <button class="filter-pill" data-filter="quadri">Quadri Elettrici & Cablaggi (6)</button>
-        <button class="filter-pill" data-filter="fotovoltaico">Fotovoltaico & Rinnovabili (4)</button>
-        <button class="filter-pill" data-filter="uffici">Uffici & Reti Dati (3)</button>
+        <button class="filter-pill active" data-filter="all"><i class="fas fa-layer-group"></i> Tutti i Progetti (69)</button>
+        <button class="filter-pill" data-filter="industriale"><i class="fas fa-industry"></i> Grandi Cantieri & Logistica (25)</button>
+        <button class="filter-pill" data-filter="quadri"><i class="fas fa-microchip"></i> Quadri Elettrici, PLC & DCS (23)</button>
+        <button class="filter-pill" data-filter="quota"><i class="fas fa-person-digging"></i> Passerelle & Lavori in Quota (23)</button>
+        <button class="filter-pill" data-filter="fotovoltaico"><i class="fas fa-solar-panel"></i> Fotovoltaico & Rinnovabili (8)</button>
+        <button class="filter-pill" data-filter="reti"><i class="fas fa-network-wired"></i> Data Center & Reti Dati (12)</button>
+        <button class="filter-pill" data-filter="civile"><i class="fas fa-house-chimney"></i> Impianti Civili & Residenziali (12)</button>
       </div>
 
-            <!-- Bento Grid with all 24 curated projects -->
+      <!-- Bento Grid with all 69 curated projects -->
       <div class="bento-grid">
-        <!-- 1. Cantiere logistico con piattaforme multiple (Span 2) -->
-        <div class="bento-item span-2" data-category="logistica" data-src="images/media_1790355268655.jpg" data-title="Cantiere Logistico con Piattaforme Aeree Multiple" data-desc="Realizzazione dell'intero impianto elettrico e canalizzazioni in un grande polo logistico mediante piattaforme aeree a braccio e a pantografo.">
+        <!-- 1. Intervento in Quota su Impianto Automatizzato Dematic -->
+        <div class="bento-item tall" data-category="industriale quota" data-src="images/logistica_cestello_dematic.jpeg" data-title="Intervento in Quota su Impianto Automatizzato Dematic" data-desc="Lavorazioni elettriche a oltre 15 metri di altezza con piattaforma aerea articolata Mollo su linee di smistamento automatico Dematic.">
+          <span class="bento-tag">Logistica Automatizzata</span>
+          <img src="images/logistica_cestello_dematic.jpeg" alt="Intervento in Quota su Impianto Automatizzato Dematic" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Intervento in Quota su Impianto Automatizzato Dematic</h4>
+            <p>Lavorazioni elettriche a oltre 15 metri di altezza con piattaforma aerea articolata Mollo su linee di smistamento automatico Dematic.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 2. Polo Logistico Industriale con Piattaforme Multiple -->
+        <div class="bento-item span-2" data-category="industriale quota" data-src="images/media_1790355268655.jpg" data-title="Polo Logistico Industriale con Piattaforme Multiple" data-desc="Realizzazione dell'intero impianto elettrico, canalizzazioni e illuminazione industriale in polo logistico ad alta intensità.">
           <span class="bento-tag">Grandi Cantieri</span>
-          <img src="images/media_1790355268655.jpg" alt="Cantiere Logistico con Piattaforme Aeree Multiple" loading="lazy"/>
+          <img src="images/media_1790355268655.jpg" alt="Polo Logistico Industriale con Piattaforme Multiple" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Polo Logistico Industriale</h4>
-            <p>Operatività simultanea su altezze elevate con piattaforme PLE e personale certificato.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Polo Logistico Industriale con Piattaforme Multiple</h4>
+            <p>Realizzazione dell'intero impianto elettrico, canalizzazioni e illuminazione industriale in polo logistico ad alta intensità.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 2. Canalizzazioni verticali su colonna (Tall) -->
-        <div class="bento-item tall" data-category="quota" data-src="images/media_1790355268403.jpg" data-title="Canalizzazioni Portacavi e Fasci Cavi su Colonna" data-desc="Posa magistrale di passerelle a rete metallica ed elegante allineamento dei fasci di cavi di potenza colorati lungo le colonne del magazzino.">
-          <span class="bento-tag">Passerelle Cavi</span>
-          <img src="images/media_1790355268403.jpg" alt="Canalizzazioni Portacavi e Fasci Cavi su Colonna" loading="lazy"/>
+        <!-- 3. Quadro Generale e Distribuzione Mezzanino Logistico -->
+        <div class="bento-item tall" data-category="industriale quadri" data-src="images/logistica_mezzanino_quadro.jpeg" data-title="Quadro Generale e Distribuzione Mezzanino Logistico" data-desc="Quadro elettrico modulare per la distribuzione di potenza a servizio del mezzanino a più livelli con canalizzazione blindosbarra.">
+          <span class="bento-tag">Mezzanino Industriale</span>
+          <img src="images/logistica_mezzanino_quadro.jpeg" alt="Quadro Generale e Distribuzione Mezzanino Logistico" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Canalizzazioni su Colonna</h4>
-            <p>Posa a regola d'arte di fasci cavi ordinati su passerella metallica zincata.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Quadro Generale e Distribuzione Mezzanino Logistico</h4>
+            <p>Quadro elettrico modulare per la distribuzione di potenza a servizio del mezzanino a più livelli con canalizzazione blindosbarra.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 3. Infilaggio Corrugati Civili Sotto Traccia (Span 2) -->
-        <div class="bento-item span-2" data-category="civile" data-src="images/civile_03.jpeg" data-title="Tubazioni Corrugate Sotto Traccia per Impianto Civile a Regola d'Arte" data-desc="Stesura millimetrica di tubazioni corrugate colorate (alimentazione, illuminazione, dati, domotica) ordinate in fasci paralleli verso la parete di smistamento.">
-          <span class="bento-tag">Civile Sottofondo</span>
-          <img src="images/civile_03.jpeg" alt="Tubazioni Corrugate Sotto Traccia per Impianto Civile" loading="lazy"/>
+        <!-- 4. Impianto Elettrico Corsie e Scaffalature a Grande Altezza -->
+        <div class="bento-item tall" data-category="industriale quota" data-src="images/magazzino_intensivo_corsie.jpeg" data-title="Impianto Elettrico Corsie e Scaffalature a Grande Altezza" data-desc="Cablaggio illuminazione a canale continuo e sensori per corsie di stoccaggio intensivo a oltre 18 metri di altezza.">
+          <span class="bento-tag">Magazzino Intensivo</span>
+          <img src="images/magazzino_intensivo_corsie.jpeg" alt="Impianto Elettrico Corsie e Scaffalature a Grande Altezza" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Infilaggio Corrugati Civili</h4>
-            <p>Posa geometrica e separazione rigorosa tra linee di potenza e segnali deboli secondo CEI 64-8.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Impianto Elettrico Corsie e Scaffalature a Grande Altezza</h4>
+            <p>Cablaggio illuminazione a canale continuo e sensori per corsie di stoccaggio intensivo a oltre 18 metri di altezza.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 4. Tecnico con DPI e Piattaforma -->
-        <div class="bento-item" data-category="logistica" data-src="images/media_1790355268635.jpg" data-title="Tecnico Elettricista Qualificato con DPI e Piattaforma" data-desc="I nostri tecnici operano con tutti i Dispositivi di Protezione Individuale (gilet alta visibilità, elmetto e imbracatura di sicurezza) nel rispetto del D.Lgs 81/08.">
+        <!-- 5. Colonna di Distribuzione con Tubazioni Rigide in Acciaio -->
+        <div class="bento-item" data-category="industriale" data-src="images/ind_colonna_prese_mollo.jpeg" data-title="Colonna di Distribuzione con Tubazioni Rigide in Acciaio" data-desc="Punti di prelievo industriale con prese CEE e bivalenti montate su pilastro portante tramite tubi metallici rigidi filettati.">
+          <span class="bento-tag">Colonne Servizi</span>
+          <img src="images/ind_colonna_prese_mollo.jpeg" alt="Colonna di Distribuzione con Tubazioni Rigide in Acciaio" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Colonna di Distribuzione con Tubazioni Rigide in Acciaio</h4>
+            <p>Punti di prelievo industriale con prese CEE e bivalenti montate su pilastro portante tramite tubi metallici rigidi filettati.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 6. Canalizzazioni Verticali e Automazione Portoni Sezionali -->
+        <div class="bento-item" data-category="industriale quota" data-src="images/ind_baia_carico_verticale.jpeg" data-title="Canalizzazioni Verticali e Automazione Portoni Sezionali" data-desc="Passerelle verticali a rete per l'alimentazione delle baie di carico merci, motorizzazioni portoni e integrazione impianto antincendio sprinkler.">
+          <span class="bento-tag">Baie di Carico</span>
+          <img src="images/ind_baia_carico_verticale.jpeg" alt="Canalizzazioni Verticali e Automazione Portoni Sezionali" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Canalizzazioni Verticali e Automazione Portoni Sezionali</h4>
+            <p>Passerelle verticali a rete per l'alimentazione delle baie di carico merci, motorizzazioni portoni e integrazione impianto antincendio sprinkler.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 7. Tecnico Specializzato con DPI e Piattaforma PLE -->
+        <div class="bento-item" data-category="industriale" data-src="images/media_1790355268635.jpg" data-title="Tecnico Specializzato con DPI e Piattaforma PLE" data-desc="Personale con abilitazione ai lavori in quota e Dispositivi di Protezione Individuale di III categoria nel rispetto del D.Lgs 81/08.">
           <span class="bento-tag">Sicurezza & DPI</span>
-          <img src="images/media_1790355268635.jpg" alt="Tecnico Elettricista Qualificato con DPI e Piattaforma" loading="lazy"/>
+          <img src="images/media_1790355268635.jpg" alt="Tecnico Specializzato con DPI e Piattaforma PLE" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Tecnico Abilitato Cantieri</h4>
-            <p>Personale specializzato con patentino PLE e formazione sicurezza sul lavoro.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Tecnico Specializzato con DPI e Piattaforma PLE</h4>
+            <p>Personale con abilitazione ai lavori in quota e Dispositivi di Protezione Individuale di III categoria nel rispetto del D.Lgs 81/08.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 5. Quadro Elettrico Schneider Generale -->
-        <div class="bento-item" data-category="quadri" data-src="images/media_1790354726590.jpg" data-title="Quadro Elettrico Industriale MT/BT con Componenti Schneider" data-desc="Quadro di potenza generale cablato secondo norma CEI con interruttori magnetotermici differenziali Schneider Electric e dorsali identificate.">
+        <!-- 8. Infrastruttura Videosorveglianza CCTV Polo Commerciale -->
+        <div class="bento-item" data-category="industriale reti" data-src="images/logistica_telecamere_cctv.jpeg" data-title="Infrastruttura Videosorveglianza CCTV Polo Commerciale" data-desc="Calate a soffitto e cablaggio PoE per telecamere IP ad alta risoluzione in grande magazzino logistico.">
+          <span class="bento-tag">Sicurezza & CCTV</span>
+          <img src="images/logistica_telecamere_cctv.jpeg" alt="Infrastruttura Videosorveglianza CCTV Polo Commerciale" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Infrastruttura Videosorveglianza CCTV Polo Commerciale</h4>
+            <p>Calate a soffitto e cablaggio PoE per telecamere IP ad alta risoluzione in grande magazzino logistico.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 9. Quadro di Distribuzione Stagno su Colonna Capannone -->
+        <div class="bento-item" data-category="industriale quadri" data-src="images/media_1790354726534.jpg" data-title="Quadro di Distribuzione Stagno su Colonna Capannone" data-desc="Centralino stagno IP65 installato su colonna in cemento armato per l'alimentazione ausiliaria e baie logistiche.">
+          <span class="bento-tag">Distribuzione Magazzino</span>
+          <img src="images/media_1790354726534.jpg" alt="Quadro di Distribuzione Stagno su Colonna Capannone" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Quadro di Distribuzione Stagno su Colonna Capannone</h4>
+            <p>Centralino stagno IP65 installato su colonna in cemento armato per l'alimentazione ausiliaria e baie logistiche.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 10. Sala Controllo e Quadri DCS Yokogawa con Pavimento Galleggiante -->
+        <div class="bento-item span-2" data-category="quadri industriale" data-src="images/sala_quadri_dcs_yokogawa.jpeg" data-title="Sala Controllo e Quadri DCS Yokogawa con Pavimento Galleggiante" data-desc="Allestimento sala apparati industriali con batterie di quadri DCS Yokogawa, plenum di raffreddamento e passerelle sottopavimento.">
+          <span class="bento-tag">Sala Quadri DCS</span>
+          <img src="images/sala_quadri_dcs_yokogawa.jpeg" alt="Sala Controllo e Quadri DCS Yokogawa con Pavimento Galleggiante" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Sala Controllo e Quadri DCS Yokogawa con Pavimento Galleggiante</h4>
+            <p>Allestimento sala apparati industriali con batterie di quadri DCS Yokogawa, plenum di raffreddamento e passerelle sottopavimento.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 11. Batteria Quadri Avviamento Motori MCC con Sezionatori Eaton -->
+        <div class="bento-item span-2" data-category="quadri industriale" data-src="images/quadri_motori_bank_eaton.jpeg" data-title="Batteria Quadri Avviamento Motori MCC con Sezionatori Eaton" data-desc="Quattro armadi di comando motori industriali con interruttori sezionatori di manovra, contattori e condutture in tubo d'acciaio zincato.">
+          <span class="bento-tag">Power Control Center</span>
+          <img src="images/quadri_motori_bank_eaton.jpeg" alt="Batteria Quadri Avviamento Motori MCC con Sezionatori Eaton" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Batteria Quadri Avviamento Motori MCC con Sezionatori Eaton</h4>
+            <p>Quattro armadi di comando motori industriali con interruttori sezionatori di manovra, contattori e condutture in tubo d'acciaio zincato.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 12. Quadro di Interfaccia e Segnali Yokogawa ad Alta Densità -->
+        <div class="bento-item tall" data-category="quadri" data-src="images/quadro_dcs_marshalling.jpeg" data-title="Quadro di Interfaccia e Segnali Yokogawa ad Alta Densità" data-desc="Cablaggio di precisione millimetrica per centinaia di canali I/O analogici e digitali con morsettiere componibili e siglatura alfanumerica.">
+          <span class="bento-tag">Marshalling DCS</span>
+          <img src="images/quadro_dcs_marshalling.jpeg" alt="Quadro di Interfaccia e Segnali Yokogawa ad Alta Densità" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Quadro di Interfaccia e Segnali Yokogawa ad Alta Densità</h4>
+            <p>Cablaggio di precisione millimetrica per centinaia di canali I/O analogici e digitali con morsettiere componibili e siglatura alfanumerica.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 13. Quadro di Automazione di Processo con Canaline Asolate -->
+        <div class="bento-item tall" data-category="quadri" data-src="images/quadro_plc_automazione.jpeg" data-title="Quadro di Automazione di Processo con Canaline Asolate" data-desc="Posa a regola d'arte dei cablaggi ausiliari di comando, relè di interfaccia e alimentatori stabilizzati per automazione industriale.">
+          <span class="bento-tag">Automazione PLC</span>
+          <img src="images/quadro_plc_automazione.jpeg" alt="Quadro di Automazione di Processo con Canaline Asolate" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Quadro di Automazione di Processo con Canaline Asolate</h4>
+            <p>Posa a regola d'arte dei cablaggi ausiliari di comando, relè di interfaccia e alimentatori stabilizzati per automazione industriale.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 14. Quadro Principale di Potenza con Interruttori Scatolati MCCB -->
+        <div class="bento-item tall" data-category="quadri industriale" data-src="images/quadro_potenza_eaton_mccb.jpeg" data-title="Quadro Principale di Potenza con Interruttori Scatolati MCCB" data-desc="Quadro di distribuzione principale con interruttori magnetotermici scatolati Eaton e barre in rame di adeguata portata termica.">
+          <span class="bento-tag">Distribuzione Potenza</span>
+          <img src="images/quadro_potenza_eaton_mccb.jpeg" alt="Quadro Principale di Potenza con Interruttori Scatolati MCCB" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Quadro Principale di Potenza con Interruttori Scatolati MCCB</h4>
+            <p>Quadro di distribuzione principale con interruttori magnetotermici scatolati Eaton e barre in rame di adeguata portata termica.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 15. Quadro con Sistema a Sbarre in Rame e Conduttori Siglati -->
+        <div class="bento-item" data-category="quadri" data-src="images/quadro_sbarre_bt.jpeg" data-title="Quadro con Sistema a Sbarre in Rame e Conduttori Siglati" data-desc="Canalizzazioni verticali con guaine termorestringenti identificate e conduttori unipolari conformi alle norme CEI EN 61439.">
+          <span class="bento-tag">Sbarre di Bassa Tensione</span>
+          <img src="images/quadro_sbarre_bt.jpeg" alt="Quadro con Sistema a Sbarre in Rame e Conduttori Siglati" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Quadro con Sistema a Sbarre in Rame e Conduttori Siglati</h4>
+            <p>Canalizzazioni verticali con guaine termorestringenti identificate e conduttori unipolari conformi alle norme CEI EN 61439.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 16. Armadio di Avviamento e Protezione Motori Eaton -->
+        <div class="bento-item" data-category="quadri" data-src="images/quadro_eaton_starter.jpeg" data-title="Armadio di Avviamento e Protezione Motori Eaton" data-desc="Dettaglio componentistica: teleruttore, relè termico differenziale, trasformatore di isolamento e cablaggio fascettato a mano.">
+          <span class="bento-tag">Avviatore Motore</span>
+          <img src="images/quadro_eaton_starter.jpeg" alt="Armadio di Avviamento e Protezione Motori Eaton" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Armadio di Avviamento e Protezione Motori Eaton</h4>
+            <p>Dettaglio componentistica: teleruttore, relè termico differenziale, trasformatore di isolamento e cablaggio fascettato a mano.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 17. Quadro Generale di Potenza con Modulari Schneider Electric -->
+        <div class="bento-item" data-category="quadri industriale" data-src="images/media_1790354726590.jpg" data-title="Quadro Generale di Potenza con Modulari Schneider Electric" data-desc="Quadro generale MT/BT con interruttori magnetotermici differenziali Schneider Electric per alimentazione carichi primari.">
           <span class="bento-tag">Quadri MT/BT</span>
-          <img src="images/media_1790354726590.jpg" alt="Quadro Elettrico Industriale MT/BT con Componenti Schneider" loading="lazy"/>
+          <img src="images/media_1790354726590.jpg" alt="Quadro Generale di Potenza con Modulari Schneider Electric" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Quadro MT/BT Schneider</h4>
-            <p>Distribuzione generale di potenza con componentistica di primaria qualità europea.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Quadro Generale di Potenza con Modulari Schneider Electric</h4>
+            <p>Quadro generale MT/BT con interruttori magnetotermici differenziali Schneider Electric per alimentazione carichi primari.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 6. Fotovoltaico Residenziale su Tetto Urbano -->
-        <div class="bento-item" data-category="civile fotovoltaico" data-src="images/civile_01.jpeg" data-title="Impianto Fotovoltaico Residenziale su Tetto Urbano" data-desc="Posa e ancoraggio di moduli fotovoltaici ad alta efficienza su copertura residenziale urbana, ottimizzati per la massima resa energetica abitativa.">
+        <!-- 18. Morsettiera Componibile su Guida DIN ad Alta Precisione -->
+        <div class="bento-item" data-category="quadri" data-src="images/morsettiera_din_tb2.jpeg" data-title="Morsettiera Componibile su Guida DIN ad Alta Precisione" data-desc="Dettaglio macro del pettine morsetti TB2-3 con numerazione progressiva di ogni singolo conduttore per collaudo funzionale.">
+          <span class="bento-tag">Morsettiere DIN</span>
+          <img src="images/morsettiera_din_tb2.jpeg" alt="Morsettiera Componibile su Guida DIN ad Alta Precisione" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Morsettiera Componibile su Guida DIN ad Alta Precisione</h4>
+            <p>Dettaglio macro del pettine morsetti TB2-3 con numerazione progressiva di ogni singolo conduttore per collaudo funzionale.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 19. Pettine Morsetti Multipiano con Pettini di Parallelo -->
+        <div class="bento-item" data-category="quadri" data-src="images/morsettiera_din_tsd.jpeg" data-title="Pettine Morsetti Multipiano con Pettini di Parallelo" data-desc="Cablaggio ad alta densità per segnali ausiliari e protezioni di interfaccia con puntalini isolati conformi a schemi unifilari.">
+          <span class="bento-tag">Morsettiera TSD</span>
+          <img src="images/morsettiera_din_tsd.jpeg" alt="Pettine Morsetti Multipiano con Pettini di Parallelo" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Pettine Morsetti Multipiano con Pettini di Parallelo</h4>
+            <p>Cablaggio ad alta densità per segnali ausiliari e protezioni di interfaccia con puntalini isolati conformi a schemi unifilari.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 20. Armadio Ausiliari con Dorsali Segnali e Canaline Verticali -->
+        <div class="bento-item" data-category="quadri" data-src="images/quadro_automazione_morsetti.jpeg" data-title="Armadio Ausiliari con Dorsali Segnali e Canaline Verticali" data-desc="Connessioni e cablaggio tra morsettiere e schede di controllo con percorsi cavi separati da linee di potenza.">
+          <span class="bento-tag">Automazione Quadri</span>
+          <img src="images/quadro_automazione_morsetti.jpeg" alt="Armadio Ausiliari con Dorsali Segnali e Canaline Verticali" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Armadio Ausiliari con Dorsali Segnali e Canaline Verticali</h4>
+            <p>Connessioni e cablaggio tra morsettiere e schede di controllo con percorsi cavi separati da linee di potenza.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 21. Cablaggio Morsettiere e Guida DIN Quadro Elettrico -->
+        <div class="bento-item" data-category="quadri" data-src="images/media_1790354726579.jpg" data-title="Cablaggio Morsettiere e Guida DIN Quadro Elettrico" data-desc="Posa pulita, fascettatura e siglatura conforme a schemi elettrici unifilari per rapida manutenzione.">
+          <span class="bento-tag">Cablaggio DIN</span>
+          <img src="images/media_1790354726579.jpg" alt="Cablaggio Morsettiere e Guida DIN Quadro Elettrico" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Cablaggio Morsettiere e Guida DIN Quadro Elettrico</h4>
+            <p>Posa pulita, fascettatura e siglatura conforme a schemi elettrici unifilari per rapida manutenzione.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 22. Illuminazione e Tubazioni Sospese Sala Apparati -->
+        <div class="bento-item" data-category="quadri industriale" data-src="images/sala_controllo_industriale.jpeg" data-title="Illuminazione e Tubazioni Sospese Sala Apparati" data-desc="Armature illuminanti industriali a LED con condotti in acciaio rigido a soffitto e allineamento degli armadi tecnici.">
+          <span class="bento-tag">Sala Controllo</span>
+          <img src="images/sala_controllo_industriale.jpeg" alt="Illuminazione e Tubazioni Sospese Sala Apparati" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Illuminazione e Tubazioni Sospese Sala Apparati</h4>
+            <p>Armature illuminanti industriali a LED con condotti in acciaio rigido a soffitto e allineamento degli armadi tecnici.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 23. Ingresso Cavi di Potenza da Fondo Quadro DCS -->
+        <div class="bento-item" data-category="quadri quota" data-src="images/dcs_passacavi_fondo.jpeg" data-title="Ingresso Cavi di Potenza da Fondo Quadro DCS" data-desc="Piastre passacavi con collari serracavo metallici per cavi unipolari di grossa sezione sotto la soletta della sala controllo.">
+          <span class="bento-tag">Passacavi DCS</span>
+          <img src="images/dcs_passacavi_fondo.jpeg" alt="Ingresso Cavi di Potenza da Fondo Quadro DCS" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Ingresso Cavi di Potenza da Fondo Quadro DCS</h4>
+            <p>Piastre passacavi con collari serracavo metallici per cavi unipolari di grossa sezione sotto la soletta della sala controllo.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 24. Quadro di Potenza e Controllo UTA Daikin su Copertura -->
+        <div class="bento-item" data-category="quadri industriale" data-src="images/ind_quadro_uta_daikin.jpeg" data-title="Quadro di Potenza e Controllo UTA Daikin su Copertura" data-desc="Centralino stagno IP65 dedicato a Unità di Trattamento Aria con pulsante di emergenza a fungo e passerella metallica a rete.">
+          <span class="bento-tag">Trattamento Aria UTA</span>
+          <img src="images/ind_quadro_uta_daikin.jpeg" alt="Quadro di Potenza e Controllo UTA Daikin su Copertura" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Quadro di Potenza e Controllo UTA Daikin su Copertura</h4>
+            <p>Centralino stagno IP65 dedicato a Unità di Trattamento Aria con pulsante di emergenza a fungo e passerella metallica a rete.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 25. Sezionatore di Manovra e Sicurezza Rotativo Stagno -->
+        <div class="bento-item" data-category="quadri" data-src="images/ind_sezionatore_ip66.jpeg" data-title="Sezionatore di Manovra e Sicurezza Rotativo Stagno" data-desc="Cablaggio trifase + neutro + terra in custodia IP66 per sezionamento a vista di motori e macchinari esterni con pressacavi a tenuta.">
+          <span class="bento-tag">Sezionatori IP66</span>
+          <img src="images/ind_sezionatore_ip66.jpeg" alt="Sezionatore di Manovra e Sicurezza Rotativo Stagno" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Sezionatore di Manovra e Sicurezza Rotativo Stagno</h4>
+            <p>Cablaggio trifase + neutro + terra in custodia IP66 per sezionamento a vista di motori e macchinari esterni con pressacavi a tenuta.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 26. Impianto Fotovoltaico Panoramico su Copertura Commerciale -->
+        <div class="bento-item span-2" data-category="fotovoltaico industriale" data-src="images/fotovoltaico_tetto_panoramico.jpeg" data-title="Impianto Fotovoltaico Panoramico su Copertura Commerciale" data-desc="Installazione di stringhe fotovoltaiche ad altissima resa energetica su copertura impermeabile bianca con vista alpina.">
+          <span class="bento-tag">Fotovoltaico Commerciale</span>
+          <img src="images/fotovoltaico_tetto_panoramico.jpeg" alt="Impianto Fotovoltaico Panoramico su Copertura Commerciale" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Impianto Fotovoltaico Panoramico su Copertura Commerciale</h4>
+            <p>Installazione di stringhe fotovoltaiche ad altissima resa energetica su copertura impermeabile bianca con vista alpina.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 27. Stringhe Fotovoltaiche Zavorrate su Lastrico Commerciale -->
+        <div class="bento-item span-2" data-category="fotovoltaico" data-src="images/fotovoltaico_tetto_autostrada.jpeg" data-title="Stringhe Fotovoltaiche Zavorrate su Lastrico Commerciale" data-desc="Moduli solari posati su zavorre in calcestruzzo areate senza perforazione della membrana di copertura, per la massima sicurezza impermeabile.">
+          <span class="bento-tag">Parco Solare Tetto</span>
+          <img src="images/fotovoltaico_tetto_autostrada.jpeg" alt="Stringhe Fotovoltaiche Zavorrate su Lastrico Commerciale" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Stringhe Fotovoltaiche Zavorrate su Lastrico Commerciale</h4>
+            <p>Moduli solari posati su zavorre in calcestruzzo areate senza perforazione della membrana di copertura, per la massima sicurezza impermeabile.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 28. Integrazione Fotovoltaico e Gruppi Termofrigoriferi Clivet -->
+        <div class="bento-item" data-category="fotovoltaico industriale" data-src="images/fotovoltaico_tetto_clivet.jpeg" data-title="Integrazione Fotovoltaico e Gruppi Termofrigoriferi Clivet" data-desc="Canalizzazioni metalliche schermate per stringhe DC lungo la copertura a servizio del polo commerciale e delle pompe di calore.">
+          <span class="bento-tag">Integrazione Rinnovabili</span>
+          <img src="images/fotovoltaico_tetto_clivet.jpeg" alt="Integrazione Fotovoltaico e Gruppi Termofrigoriferi Clivet" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Integrazione Fotovoltaico e Gruppi Termofrigoriferi Clivet</h4>
+            <p>Canalizzazioni metalliche schermate per stringhe DC lungo la copertura a servizio del polo commerciale e delle pompe di calore.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 29. Disposizione Aerodinamica Moduli Solari Monocristallini -->
+        <div class="bento-item" data-category="fotovoltaico" data-src="images/fotovoltaico_tetto_stringhe.jpeg" data-title="Disposizione Aerodinamica Moduli Solari Monocristallini" data-desc="Allineamento e bilanciamento stringhe con cavo solare anti-UV e canaline asolate zincate a caldo.">
+          <span class="bento-tag">Stringhe DC</span>
+          <img src="images/fotovoltaico_tetto_stringhe.jpeg" alt="Disposizione Aerodinamica Moduli Solari Monocristallini" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Disposizione Aerodinamica Moduli Solari Monocristallini</h4>
+            <p>Allineamento e bilanciamento stringhe con cavo solare anti-UV e canaline asolate zincate a caldo.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 30. Inverter Commerciale Huawei FusionSolar ad Alta Resa -->
+        <div class="bento-item" data-category="fotovoltaico" data-src="images/media_1790350104097.jpg" data-title="Inverter Commerciale Huawei FusionSolar ad Alta Resa" data-desc="Inverter fotovoltaico trifase Huawei intelligente con scaricatori di sovratensione e monitoraggio wireless integrato.">
+          <span class="bento-tag">Inverter Huawei</span>
+          <img src="images/media_1790350104097.jpg" alt="Inverter Commerciale Huawei FusionSolar ad Alta Resa" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Inverter Commerciale Huawei FusionSolar ad Alta Resa</h4>
+            <p>Inverter fotovoltaico trifase Huawei intelligente con scaricatori di sovratensione e monitoraggio wireless integrato.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 31. Impianto Solare Industriale e Quadri di Campo su Copertura -->
+        <div class="bento-item" data-category="fotovoltaico industriale" data-src="images/media_1790350104090.jpg" data-title="Impianto Solare Industriale e Quadri di Campo su Copertura" data-desc="Quadri di parallelo stringhe IP65 con protezioni da intemperie e canaline zincate per capannone produttivo.">
+          <span class="bento-tag">Fotovoltaico Tetto</span>
+          <img src="images/media_1790350104090.jpg" alt="Impianto Solare Industriale e Quadri di Campo su Copertura" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Impianto Solare Industriale e Quadri di Campo su Copertura</h4>
+            <p>Quadri di parallelo stringhe IP65 con protezioni da intemperie e canaline zincate per capannone produttivo.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 32. Impianto Fotovoltaico Residenziale su Tetto Urbano -->
+        <div class="bento-item" data-category="fotovoltaico civile" data-src="images/civile_01.jpeg" data-title="Impianto Fotovoltaico Residenziale su Tetto Urbano" data-desc="Posa moduli fotovoltaici su copertura abitativa urbana per il raggiungimento della massima indipendenza energetica della casa.">
           <span class="bento-tag">Fotovoltaico Residenziale</span>
           <img src="images/civile_01.jpeg" alt="Impianto Fotovoltaico Residenziale su Tetto Urbano" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Fotovoltaico Residenziale</h4>
-            <p>Moduli solari ad alto rendimento per villette e complessi residenziali con vista panoramica.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Impianto Fotovoltaico Residenziale su Tetto Urbano</h4>
+            <p>Posa moduli fotovoltaici su copertura abitativa urbana per il raggiungimento della massima indipendenza energetica della casa.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 7. Lavori a soffitto con pantografo (Span 2) -->
-        <div class="bento-item span-2" data-category="quota" data-src="images/media_1790355268424.jpg" data-title="Installazione Linee e Illuminazione a Soffitto in Quota" data-desc="Intervento a oltre 14 metri d'altezza per il fissaggio di passerelle e l'installazione di armature illuminanti a LED per capannoni industriali.">
+        <!-- 33. Stringa Solare Fotovoltaica con Zavorre per Condominio -->
+        <div class="bento-item" data-category="fotovoltaico civile" data-src="images/civile_02.jpeg" data-title="Stringa Solare Fotovoltaica con Zavorre per Condominio" data-desc="Installazione aerodinamica su lastrico solare condominiale piano per autoconsumo energetico condiviso.">
+          <span class="bento-tag">Lastrico Solare</span>
+          <img src="images/civile_02.jpeg" alt="Stringa Solare Fotovoltaica con Zavorre per Condominio" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Stringa Solare Fotovoltaica con Zavorre per Condominio</h4>
+            <p>Installazione aerodinamica su lastrico solare condominiale piano per autoconsumo energetico condiviso.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 34. Armadio Rack 19" con Cablaggio Strutturato a Spina di Pesce -->
+        <div class="bento-item tall" data-category="reti" data-src="images/rack_cablaggio_arte.jpeg" data-title="Armadio Rack 19&quot; con Cablaggio Strutturato a Spina di Pesce" data-desc="Spettacolare composizione di cavi di rete Cat. 6A con curvature a 90° perfette, fascettatura millimetrica e pettinatura manuale.">
+          <span class="bento-tag">Cablaggio a Regola d'Arte</span>
+          <img src="images/rack_cablaggio_arte.jpeg" alt="Armadio Rack 19&quot; con Cablaggio Strutturato a Spina di Pesce" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Armadio Rack 19" con Cablaggio Strutturato a Spina di Pesce</h4>
+            <p>Spettacolare composizione di cavi di rete Cat. 6A con curvature a 90° perfette, fascettatura millimetrica e pettinatura manuale.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 35. Discesa a Cascata dei Fasci Dati su Armadio Server -->
+        <div class="bento-item tall" data-category="reti" data-src="images/datacenter_rack_green.jpeg" data-title="Discesa a Cascata dei Fasci Dati su Armadio Server" data-desc="Fasci cavi verdi Cat. 6A schermati con ancoraggio posteriore ai montanti dell'armadio rack da 42 unità.">
+          <span class="bento-tag">Data Center 42U</span>
+          <img src="images/datacenter_rack_green.jpeg" alt="Discesa a Cascata dei Fasci Dati su Armadio Server" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Discesa a Cascata dei Fasci Dati su Armadio Server</h4>
+            <p>Fasci cavi verdi Cat. 6A schermati con ancoraggio posteriore ai montanti dell'armadio rack da 42 unità.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 36. Cascata Cavi Viola Cat. 6A su Pannelli Patch 24 Porte -->
+        <div class="bento-item tall" data-category="reti" data-src="images/datacenter_rack_purple.jpeg" data-title="Cascata Cavi Viola Cat. 6A su Pannelli Patch 24 Porte" data-desc="Distribuzione ordinata dei conduttori dati verso gli switch con canaline passapermuta e gestione flussi d'aria.">
+          <span class="bento-tag">Reti Strutturate</span>
+          <img src="images/datacenter_rack_purple.jpeg" alt="Cascata Cavi Viola Cat. 6A su Pannelli Patch 24 Porte" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Cascata Cavi Viola Cat. 6A su Pannelli Patch 24 Porte</h4>
+            <p>Distribuzione ordinata dei conduttori dati verso gli switch con canaline passapermuta e gestione flussi d'aria.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 37. Fronte Armadio Rack con Oltre 240 Porte RJ45 Certificate -->
+        <div class="bento-item tall" data-category="reti" data-src="images/datacenter_rack_patchpanels.jpeg" data-title="Fronte Armadio Rack con Oltre 240 Porte RJ45 Certificate" data-desc="Pannelli patch ad alta densità con connettori schermati categoria 6A e certificazione strumentale di ogni singolo link.">
+          <span class="bento-tag">Patch Panel Front</span>
+          <img src="images/datacenter_rack_patchpanels.jpeg" alt="Fronte Armadio Rack con Oltre 240 Porte RJ45 Certificate" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Fronte Armadio Rack con Oltre 240 Porte RJ45 Certificate</h4>
+            <p>Pannelli patch ad alta densità con connettori schermati categoria 6A e certificazione strumentale di ogni singolo link.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 38. Posa Cavi Dati e Dorsali in Fibra Ottica per Polo Logistico -->
+        <div class="bento-item span-2" data-category="reti industriale" data-src="images/datacenter_bobine_fibra.jpeg" data-title="Posa Cavi Dati e Dorsali in Fibra Ottica per Polo Logistico" data-desc="Stesura dorsali in fibra ottica e cablaggio rame a servizio del centro dati logistico con rack server e gruppi UPS.">
+          <span class="bento-tag">Infrastruttura Dati</span>
+          <img src="images/datacenter_bobine_fibra.jpeg" alt="Posa Cavi Dati e Dorsali in Fibra Ottica per Polo Logistico" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Posa Cavi Dati e Dorsali in Fibra Ottica per Polo Logistico</h4>
+            <p>Stesura dorsali in fibra ottica e cablaggio rame a servizio del centro dati logistico con rack server e gruppi UPS.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 39. Organizzazione Laterale Cavi e Ventole di Estrazione -->
+        <div class="bento-item" data-category="reti" data-src="images/datacenter_rack_side.jpeg" data-title="Organizzazione Laterale Cavi e Ventole di Estrazione" data-desc="Vista laterale del rack con anelli passacavi verticali e ventole termostata a tetto per dissipazione termica.">
+          <span class="bento-tag">Rack Side View</span>
+          <img src="images/datacenter_rack_side.jpeg" alt="Organizzazione Laterale Cavi e Ventole di Estrazione" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Organizzazione Laterale Cavi e Ventole di Estrazione</h4>
+            <p>Vista laterale del rack con anelli passacavi verticali e ventole termostata a tetto per dissipazione termica.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 40. Postazione Prese Industriali Protette e Frutti Dati RJ45 -->
+        <div class="bento-item" data-category="reti industriale" data-src="images/ind_prese_dati_parete.jpeg" data-title="Postazione Prese Industriali Protette e Frutti Dati RJ45" data-desc="Scatole stagne a parete con prese bivalenti, prese rosse sotto gruppo di continuità UPS e connettori rete identificati.">
+          <span class="bento-tag">Prese Industriali & Dati</span>
+          <img src="images/ind_prese_dati_parete.jpeg" alt="Postazione Prese Industriali Protette e Frutti Dati RJ45" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Postazione Prese Industriali Protette e Frutti Dati RJ45</h4>
+            <p>Scatole stagne a parete con prese bivalenti, prese rosse sotto gruppo di continuità UPS e connettori rete identificati.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 41. Torrette a Scomparsa a Pavimento a Norma CEI per Uffici -->
+        <div class="bento-item" data-category="reti" data-src="images/media_1790350104110.jpg" data-title="Torrette a Scomparsa a Pavimento a Norma CEI per Uffici" data-desc="Scatole calpestabili a filo pavimento con prese Schuko, bivalenti e porte dati schermate per open space direzionali.">
+          <span class="bento-tag">Prese a Pavimento</span>
+          <img src="images/media_1790350104110.jpg" alt="Torrette a Scomparsa a Pavimento a Norma CEI per Uffici" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Torrette a Scomparsa a Pavimento a Norma CEI per Uffici</h4>
+            <p>Scatole calpestabili a filo pavimento con prese Schuko, bivalenti e porte dati schermate per open space direzionali.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 42. Cablaggio Flessibile Sagomato per Postazioni Ufficio -->
+        <div class="bento-item" data-category="reti" data-src="images/media_1790350104124.jpg" data-title="Cablaggio Flessibile Sagomato per Postazioni Ufficio" data-desc="Guaine a vertebra snodate per la discesa ordinata dei cavi dati e potenza dal pavimento alle scrivanie operative.">
+          <span class="bento-tag">Reti & Scrivanie</span>
+          <img src="images/media_1790350104124.jpg" alt="Cablaggio Flessibile Sagomato per Postazioni Ufficio" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Cablaggio Flessibile Sagomato per Postazioni Ufficio</h4>
+            <p>Guaine a vertebra snodate per la discesa ordinata dei cavi dati e potenza dal pavimento alle scrivanie operative.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 43. Distribuzione Elettrica e Reti Dati per Uffici Operativi -->
+        <div class="bento-item" data-category="reti" data-src="images/media_1790350104145.jpg" data-title="Distribuzione Elettrica e Reti Dati per Uffici Operativi" data-desc="Allestimento chiavi in mano con cablaggio strutturato e linee dedicate UPS per continuità operativa senza interruzioni.">
+          <span class="bento-tag">Infrastruttura Uffici</span>
+          <img src="images/media_1790350104145.jpg" alt="Distribuzione Elettrica e Reti Dati per Uffici Operativi" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Distribuzione Elettrica e Reti Dati per Uffici Operativi</h4>
+            <p>Allestimento chiavi in mano con cablaggio strutturato e linee dedicate UPS per continuità operativa senza interruzioni.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 44. Colonna Montante su Passerelle a Rete con Cestello PLE -->
+        <div class="bento-item tall" data-category="quota industriale" data-src="images/passerelle_verticali_riser.jpeg" data-title="Colonna Montante su Passerelle a Rete con Cestello PLE" data-desc="Salita verticale di fasci cavi di potenza colorati (blu e verdi) lungo le pareti del polo logistico mediante piattaforma elevabile.">
+          <span class="bento-tag">Riser Verticali</span>
+          <img src="images/passerelle_verticali_riser.jpeg" alt="Colonna Montante su Passerelle a Rete con Cestello PLE" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Colonna Montante su Passerelle a Rete con Cestello PLE</h4>
+            <p>Salita verticale di fasci cavi di potenza colorati (blu e verdi) lungo le pareti del polo logistico mediante piattaforma elevabile.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 45. Svincolo a 90° e Discesa Passerella Sospesa con Cappucci di Sicurezza -->
+        <div class="bento-item tall" data-category="quota" data-src="images/passerella_svincolo_90.jpeg" data-title="Svincolo a 90° e Discesa Passerella Sospesa con Cappucci di Sicurezza" data-desc="Curvatura e derivazione aerea di passerelle a rete metallica con tappi di protezione arancioni antinfortunio sui profilati.">
+          <span class="bento-tag">Curve e Svincoli</span>
+          <img src="images/passerella_svincolo_90.jpeg" alt="Svincolo a 90° e Discesa Passerella Sospesa con Cappucci di Sicurezza" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Svincolo a 90° e Discesa Passerella Sospesa con Cappucci di Sicurezza</h4>
+            <p>Curvatura e derivazione aerea di passerelle a rete metallica con tappi di protezione arancioni antinfortunio sui profilati.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 46. Scala Portacavi Pesante con Dorsale di Terra Equipotenziale -->
+        <div class="bento-item tall" data-category="quota industriale" data-src="images/scala_portacavi_pesante.jpeg" data-title="Scala Portacavi Pesante con Dorsale di Terra Equipotenziale" data-desc="Passerella a traversini per carichi elevati con cavi di potenza ancorati e barra collettrice di terra in rame massiccio.">
+          <span class="bento-tag">Scale Portacavi</span>
+          <img src="images/scala_portacavi_pesante.jpeg" alt="Scala Portacavi Pesante con Dorsale di Terra Equipotenziale" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Scala Portacavi Pesante con Dorsale di Terra Equipotenziale</h4>
+            <p>Passerella a traversini per carichi elevati con cavi di potenza ancorati e barra collettrice di terra in rame massiccio.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 47. Canalizzazioni Portacavi e Fasci Cavi su Colonna -->
+        <div class="bento-item tall" data-category="quota" data-src="images/media_1790355268403.jpg" data-title="Canalizzazioni Portacavi e Fasci Cavi su Colonna" data-desc="Posa magistrale di passerelle a rete metallica ed elegante allineamento dei fasci di cavi di potenza lungo le colonne del magazzino.">
+          <span class="bento-tag">Passerelle su Pilastro</span>
+          <img src="images/media_1790355268403.jpg" alt="Canalizzazioni Portacavi e Fasci Cavi su Colonna" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Canalizzazioni Portacavi e Fasci Cavi su Colonna</h4>
+            <p>Posa magistrale di passerelle a rete metallica ed elegante allineamento dei fasci di cavi di potenza lungo le colonne del magazzino.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 48. Installazione Linee e Illuminazione a Soffitto con Pantografo -->
+        <div class="bento-item span-2" data-category="quota" data-src="images/media_1790355268424.jpg" data-title="Installazione Linee e Illuminazione a Soffitto con Pantografo" data-desc="Intervento a oltre 14 metri d'altezza per il fissaggio di passerelle e l'installazione di armature illuminanti a LED per capannoni.">
           <span class="bento-tag">Lavori in Quota</span>
-          <img src="images/media_1790355268424.jpg" alt="Installazione Linee e Illuminazione a Soffitto in Quota" loading="lazy"/>
+          <img src="images/media_1790355268424.jpg" alt="Installazione Linee e Illuminazione a Soffitto con Pantografo" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Illuminazione & Linee Soffitto</h4>
-            <p>Piattaforma elevabile a pantografo per il montaggio linee a soffitto in capannone logistico.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Installazione Linee e Illuminazione a Soffitto con Pantografo</h4>
+            <p>Intervento a oltre 14 metri d'altezza per il fissaggio di passerelle e l'installazione di armature illuminanti a LED per capannoni.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 8. Quadro Elettrico e Colonna Montante Condominiale (Tall) -->
-        <div class="bento-item tall" data-category="civile quadri" data-src="images/civile_06.jpeg" data-title="Quadro Elettrico e Colonna Montante Condominiale" data-desc="Quadro generale di distribuzione condominiale con cavi antifiamma FG16 a doppio isolamento ordinati su passerella metallica a fondo quadro.">
-          <span class="bento-tag">Montanti Condominiali</span>
-          <img src="images/civile_06.jpeg" alt="Quadro Elettrico e Colonna Montante Condominiale" loading="lazy"/>
+        <!-- 49. Posa Passerelle Metalliche su Massetto Grezzo -->
+        <div class="bento-item span-2" data-category="quota civile" data-src="images/ind_passerelle_subfloor.jpeg" data-title="Posa Passerelle Metalliche su Massetto Grezzo" data-desc="Stesura di canali a rete metallica fissati alla soletta prima della realizzazione del pavimento flottante con giunzioni a scatto rapido.">
+          <span class="bento-tag">Passerelle a Pavimento</span>
+          <img src="images/ind_passerelle_subfloor.jpeg" alt="Posa Passerelle Metalliche su Massetto Grezzo" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Distribuzione Condominiale</h4>
-            <p>Colonna montante e sezionamento linee con passerella metallica e cavi certificati CPR.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Posa Passerelle Metalliche su Massetto Grezzo</h4>
+            <p>Stesura di canali a rete metallica fissati alla soletta prima della realizzazione del pavimento flottante con giunzioni a scatto rapido.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 9. Piattaforme pantografo e braccio articolato -->
-        <div class="bento-item" data-category="quota" data-src="images/media_1790355268649.jpg" data-title="Lavori in Quota con Piattaforme Multiple e Braccio Articolato" data-desc="Coordinamento avanzato di piattaforme elevabili a braccio e a pantografo per lavorazioni elettriche complesse a ridosso del soffitto.">
-          <span class="bento-tag">Lavori in Quota</span>
-          <img src="images/media_1790355268649.jpg" alt="Lavori in Quota con Piattaforme Multiple" loading="lazy"/>
+        <!-- 50. Cavi Unipolari di Potenza con Morsetti Serracavo Metallici -->
+        <div class="bento-item tall" data-category="quota quadri" data-src="images/ind_cavi_potenza_serrafili.jpeg" data-title="Cavi Unipolari di Potenza con Morsetti Serracavo Metallici" data-desc="Fissaggio antisismico dei cavi di alimentazione mediante selle e morsetti a vite su passerella sottopavimento.">
+          <span class="bento-tag">Cavi con Morsetti</span>
+          <img src="images/ind_cavi_potenza_serrafili.jpeg" alt="Cavi Unipolari di Potenza con Morsetti Serracavo Metallici" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Piattaforme Aeree Multiple</h4>
-            <p>Capacità operativa su grandi altezze con attrezzature all'avanguardia.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Cavi Unipolari di Potenza con Morsetti Serracavo Metallici</h4>
+            <p>Fissaggio antisismico dei cavi di alimentazione mediante selle e morsetti a vite su passerella sottopavimento.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 10. Centralino Elettrico Appartamento DIN -->
-        <div class="bento-item" data-category="civile quadri" data-src="images/civile_09.jpeg" data-title="Centralino Elettrico da Incasso per Appartamento Residenziale" data-desc="Centralino modulare DIN incassato a parete con suddivisione carichi (luce, prese, induzione, climatizzazione) e protezione magnetotermica differenziale evoluta.">
-          <span class="bento-tag">Centralino Civile DIN</span>
-          <img src="images/civile_09.jpeg" alt="Centralino Elettrico da Incasso per Appartamento Residenziale" loading="lazy"/>
+        <!-- 51. Dorsali di Alimentazione Principale con Collari di Bloccaggio -->
+        <div class="bento-item tall" data-category="quota quadri" data-src="images/cavi_potenza_collari.jpeg" data-title="Dorsali di Alimentazione Principale con Collari di Bloccaggio" data-desc="Allineamento perfetto di 8 conduttori unipolari pesanti con collari metallici filettati all'ingresso dei quadri generali.">
+          <span class="bento-tag">Conduttori di Potenza</span>
+          <img src="images/cavi_potenza_collari.jpeg" alt="Dorsali di Alimentazione Principale con Collari di Bloccaggio" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Centralino Appartamento</h4>
-            <p>Protezione selettiva carichi con interruttori differenziali magnetotermici ad alta sensibilità.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Dorsali di Alimentazione Principale con Collari di Bloccaggio</h4>
+            <p>Allineamento perfetto di 8 conduttori unipolari pesanti con collari metallici filettati all'ingresso dei quadri generali.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 11. Passerelle sospese su travi metalliche -->
+        <!-- 52. Passerelle Sospese su Travature Metalliche e Rete Sprinkler -->
+        <div class="bento-item" data-category="quota industriale" data-src="images/passerelle_sotto_mezzanino.jpeg" data-title="Passerelle Sospese su Travature Metalliche e Rete Sprinkler" data-desc="Staffaggio antisismico e percorsi cavi ordinati sotto la soletta in grigliato metallico del soppalco industriale.">
+          <span class="bento-tag">Sotto-Mezzanino</span>
+          <img src="images/passerelle_sotto_mezzanino.jpeg" alt="Passerelle Sospese su Travature Metalliche e Rete Sprinkler" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Passerelle Sospese su Travature Metalliche e Rete Sprinkler</h4>
+            <p>Staffaggio antisismico e percorsi cavi ordinati sotto la soletta in grigliato metallico del soppalco industriale.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 53. Autostrada Cavi Sottopavimento con Centinaia di Conduttori -->
+        <div class="bento-item" data-category="quota reti" data-src="images/ind_passerella_sottopavimento.jpeg" data-title="Autostrada Cavi Sottopavimento con Centinaia di Conduttori" data-desc="Posa ad alta densità su passerella metallica zincata con separazione tra cavi di segnale e cavo di messa a terra verde-giallo.">
+          <span class="bento-tag">Sottopavimento Tecnico</span>
+          <img src="images/ind_passerella_sottopavimento.jpeg" alt="Autostrada Cavi Sottopavimento con Centinaia di Conduttori" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Autostrada Cavi Sottopavimento con Centinaia di Conduttori</h4>
+            <p>Posa ad alta densità su passerella metallica zincata con separazione tra cavi di segnale e cavo di messa a terra verde-giallo.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 54. Raggi di Curvatura Ottimali per Cavi di Grossa Sezione -->
+        <div class="bento-item" data-category="quota" data-src="images/passerelle_curve_potenza.jpeg" data-title="Raggi di Curvatura Ottimali per Cavi di Grossa Sezione" data-desc="Gestione delle curve nel pieno rispetto del raggio minimo consentito per preservare l'integrità dell'isolamento termoplastico.">
+          <span class="bento-tag">Curve di Potenza</span>
+          <img src="images/passerelle_curve_potenza.jpeg" alt="Raggi di Curvatura Ottimali per Cavi di Grossa Sezione" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Raggi di Curvatura Ottimali per Cavi di Grossa Sezione</h4>
+            <p>Gestione delle curve nel pieno rispetto del raggio minimo consentito per preservare l'integrità dell'isolamento termoplastico.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 55. Incrocio Geometrico Dorsali su Passerella a Rete -->
+        <div class="bento-item" data-category="quota" data-src="images/passerelle_incrocio_cavi.jpeg" data-title="Incrocio Geometrico Dorsali su Passerella a Rete" data-desc="Disposizione a livelli sfalsati per eliminare sovrapposizioni e garantire adeguata dissipazione termica dei fasci cavi.">
+          <span class="bento-tag">Incroci e Smistamento</span>
+          <img src="images/passerelle_incrocio_cavi.jpeg" alt="Incrocio Geometrico Dorsali su Passerella a Rete" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Incrocio Geometrico Dorsali su Passerella a Rete</h4>
+            <p>Disposizione a livelli sfalsati per eliminare sovrapposizioni e garantire adeguata dissipazione termica dei fasci cavi.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 56. Attraversamenti a Parete con Telai Sigillati Tagliafuoco -->
+        <div class="bento-item" data-category="quota industriale" data-src="images/ind_cavi_passanti_mct.jpeg" data-title="Attraversamenti a Parete con Telai Sigillati Tagliafuoco" data-desc="Salita cavi su scale verticali con passaggio attraverso telai sigillati tagliafuoco certificati REI per compartimentazione antincendio.">
+          <span class="bento-tag">Passaggi Tagliafuoco MCT</span>
+          <img src="images/ind_cavi_passanti_mct.jpeg" alt="Attraversamenti a Parete con Telai Sigillati Tagliafuoco" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Attraversamenti a Parete con Telai Sigillati Tagliafuoco</h4>
+            <p>Salita cavi su scale verticali con passaggio attraverso telai sigillati tagliafuoco certificati REI per compartimentazione antincendio.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 57. Passerella a Rete Sospesa con Staffe a Sbalzo -->
+        <div class="bento-item" data-category="quota" data-src="images/ind_passerella_calata.jpeg" data-title="Passerella a Rete Sospesa con Staffe a Sbalzo" data-desc="Fissaggio a parete tramite mensole metalliche profilate con discesa verticale e agganci a morsetto rapido.">
+          <span class="bento-tag">Calate a Parete</span>
+          <img src="images/ind_passerella_calata.jpeg" alt="Passerella a Rete Sospesa con Staffe a Sbalzo" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Passerella a Rete Sospesa con Staffe a Sbalzo</h4>
+            <p>Fissaggio a parete tramite mensole metalliche profilate con discesa verticale e agganci a morsetto rapido.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 58. Canalizzazioni Sagomate in Tubo d'Acciaio Zincato -->
+        <div class="bento-item" data-category="quota industriale" data-src="images/ind_tubi_acciaio_curvati.jpeg" data-title="Canalizzazioni Sagomate in Tubo d'Acciaio Zincato" data-desc="Curvatura a freddo di tubazioni rigide per aggirare condotte aerauliche mantenendo la perfetta complanarità dei percorsi.">
+          <span class="bento-tag">Tubi Acciaio Rigidi</span>
+          <img src="images/ind_tubi_acciaio_curvati.jpeg" alt="Canalizzazioni Sagomate in Tubo d'Acciaio Zincato" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Canalizzazioni Sagomate in Tubo d'Acciaio Zincato</h4>
+            <p>Curvatura a freddo di tubazioni rigide per aggirare condotte aerauliche mantenendo la perfetta complanarità dei percorsi.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 59. Lavori in Quota con Piattaforme Multiple a Braccio -->
+        <div class="bento-item" data-category="quota" data-src="images/media_1790355268649.jpg" data-title="Lavori in Quota con Piattaforme Multiple a Braccio" data-desc="Coordinamento simultaneo di piattaforme a braccio e a pantografo per lavorazioni complesse a ridosso delle campate del tetto.">
+          <span class="bento-tag">Piattaforme Aeree</span>
+          <img src="images/media_1790355268649.jpg" alt="Lavori in Quota con Piattaforme Multiple a Braccio" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Lavori in Quota con Piattaforme Multiple a Braccio</h4>
+            <p>Coordinamento simultaneo di piattaforme a braccio e a pantografo per lavorazioni complesse a ridosso delle campate del tetto.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 60. Passerelle Sospese su Travi Metalliche Industriali -->
         <div class="bento-item" data-category="quota" data-src="images/media_1790354746739.jpg" data-title="Passerelle Sospese su Travi Metalliche Industriali" data-desc="Staffaggio e sospensione di canali portacavi su orditura metallica pesante con piattaforma aerea verticale.">
           <span class="bento-tag">Passerelle Sospese</span>
           <img src="images/media_1790354746739.jpg" alt="Passerelle Sospese su Travi Metalliche Industriali" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Passerelle su Struttura Metallica</h4>
-            <p>Fissaggio antisismico e posa cavi ad alta quota con precisione millimetrica.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Passerelle Sospese su Travi Metalliche Industriali</h4>
+            <p>Staffaggio e sospensione di canali portacavi su orditura metallica pesante con piattaforma aerea verticale.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 12. Rete Sottofondo e Dorsali Appartamento (Span 2) -->
-        <div class="bento-item span-2" data-category="civile" data-src="images/civile_04.jpeg" data-title="Distribuzione Sotto Traccia e Fascio Dorsali per Appartamento" data-desc="Panoramica completa della rete di corrugati sotto traccia prima del massetto, con convergenza ordinata delle dorsali verso il quadro elettrico principale.">
+        <!-- 61. Tubazioni Corrugate Sotto Traccia per Impianto Civile a Regola d'Arte -->
+        <div class="bento-item span-2" data-category="civile" data-src="images/civile_03.jpeg" data-title="Tubazioni Corrugate Sotto Traccia per Impianto Civile a Regola d'Arte" data-desc="Stesura millimetrica di tubazioni corrugate colorate (luce, forza motrice, dati, domotica) ordinate in fasci paralleli verso la parete di smistamento.">
+          <span class="bento-tag">Civile Sottofondo</span>
+          <img src="images/civile_03.jpeg" alt="Tubazioni Corrugate Sotto Traccia per Impianto Civile a Regola d'Arte" loading="lazy"/>
+          <div class="bento-overlay">
+            <h4>Tubazioni Corrugate Sotto Traccia per Impianto Civile a Regola d'Arte</h4>
+            <p>Stesura millimetrica di tubazioni corrugate colorate (luce, forza motrice, dati, domotica) ordinate in fasci paralleli verso la parete di smistamento.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
+          </div>
+        </div>
+
+        <!-- 62. Distribuzione Sotto Traccia e Fascio Dorsali per Appartamento -->
+        <div class="bento-item span-2" data-category="civile" data-src="images/civile_04.jpeg" data-title="Distribuzione Sotto Traccia e Fascio Dorsali per Appartamento" data-desc="Panoramica completa della rete di corrugati sotto traccia prima del massetto, con convergenza ordinata delle dorsali verso il quadro principale.">
           <span class="bento-tag">Dorsali Appartamento</span>
           <img src="images/civile_04.jpeg" alt="Distribuzione Sotto Traccia e Fascio Dorsali per Appartamento" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Rete Sottofondo Appartamento</h4>
-            <p>Canalizzazioni a pavimento studiate per facilitare futuri reinfilaggi e massima affidabilità nel tempo.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Distribuzione Sotto Traccia e Fascio Dorsali per Appartamento</h4>
+            <p>Panoramica completa della rete di corrugati sotto traccia prima del massetto, con convergenza ordinata delle dorsali verso il quadro principale.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 13. Cablaggio Morsettiere DIN -->
-        <div class="bento-item" data-category="quadri" data-src="images/media_1790354726579.jpg" data-title="Cablaggio Morsettiere e Guida DIN Quadro Elettrico" data-desc="Dettaglio artigianale del cablaggio delle morsettiere di sezionamento e alimentazione su guida DIN modulare.">
-          <span class="bento-tag">Cablaggio DIN</span>
-          <img src="images/media_1790354726579.jpg" alt="Cablaggio Morsettiere e Guida DIN Quadro Elettrico" loading="lazy"/>
+        <!-- 63. Scatole di Derivazione e Fasci Corrugati su Muratura in Forati -->
+        <div class="bento-item tall" data-category="civile" data-src="images/civile_tracce_mattoni.jpeg" data-title="Scatole di Derivazione e Fasci Corrugati su Muratura in Forati" data-desc="Tracce a parete su laterizio forato con inserimento di scatole portafrutti 503 e fasci corrugati ordinati prima della rasatura a gesso.">
+          <span class="bento-tag">Muratura Forati</span>
+          <img src="images/civile_tracce_mattoni.jpeg" alt="Scatole di Derivazione e Fasci Corrugati su Muratura in Forati" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Cablaggio Morsettiere DIN</h4>
-            <p>Posa pulita, fascettatura e siglatura conforme a schemi elettrici unifilari.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Scatole di Derivazione e Fasci Corrugati su Muratura in Forati</h4>
+            <p>Tracce a parete su laterizio forato con inserimento di scatole portafrutti 503 e fasci corrugati ordinati prima della rasatura a gesso.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 14. Stringa Solare su Lastrico con Zavorre -->
-        <div class="bento-item" data-category="civile fotovoltaico" data-src="images/civile_02.jpeg" data-title="Stringa Solare Fotovoltaica su Lastrico con Zavorre a Bassa Inclinazione" data-desc="Installazione di pannelli fotovoltaici zavorrati su lastrico piano condominiale, senza fori nella guaina impermeabilizzante per la massima sicurezza.">
-          <span class="bento-tag">Lastrico Solare</span>
-          <img src="images/civile_02.jpeg" alt="Stringa Solare Fotovoltaica su Lastrico Solare con Zavorre" loading="lazy"/>
+        <!-- 64. Quadro Elettrico e Colonna Montante Condominiale con Passerella -->
+        <div class="bento-item tall" data-category="civile quadri" data-src="images/civile_06.jpeg" data-title="Quadro Elettrico e Colonna Montante Condominiale con Passerella" data-desc="Quadro generale di distribuzione condominiale con cavi antifiamma FG16 a doppio isolamento ordinati su passerella metallica a fondo quadro.">
+          <span class="bento-tag">Montanti Condominiali</span>
+          <img src="images/civile_06.jpeg" alt="Quadro Elettrico e Colonna Montante Condominiale con Passerella" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Impianto Solare su Lastrico</h4>
-            <p>Strutture zavorrate aerodinamiche senza perforazione della copertura impermeabile.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Quadro Elettrico e Colonna Montante Condominiale con Passerella</h4>
+            <p>Quadro generale di distribuzione condominiale con cavi antifiamma FG16 a doppio isolamento ordinati su passerella metallica a fondo quadro.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 15. Quadro e Distribuzione Colonna Magazzino -->
-        <div class="bento-item" data-category="logistica quadri" data-src="images/media_1790354726534.jpg" data-title="Quadro di Distribuzione su Colonna Capannone" data-desc="Quadro stagno IP65 installato su pilastro portante per la distribuzione elettrica delle corsie di magazzino.">
-          <span class="bento-tag">Distribuzione Magazzino</span>
-          <img src="images/media_1790354726534.jpg" alt="Quadro di Distribuzione su Colonna Capannone" loading="lazy"/>
+        <!-- 65. Centralino Elettrico da Incasso per Appartamento Residenziale -->
+        <div class="bento-item" data-category="civile quadri" data-src="images/civile_09.jpeg" data-title="Centralino Elettrico da Incasso per Appartamento Residenziale" data-desc="Centralino modulare DIN incassato a parete con suddivisione selettiva dei carichi (luce, prese, piano induzione, climatizzazione).">
+          <span class="bento-tag">Centralino Civile DIN</span>
+          <img src="images/civile_09.jpeg" alt="Centralino Elettrico da Incasso per Appartamento Residenziale" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Distribuzione Colonna Magazzino</h4>
-            <p>Punti di alimentazione dedicati per corsie logistiche e baie di carico.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Centralino Elettrico da Incasso per Appartamento Residenziale</h4>
+            <p>Centralino modulare DIN incassato a parete con suddivisione selettiva dei carichi (luce, prese, piano induzione, climatizzazione).</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 16. Manutenzione Pali & Illuminazione Esterna (Tall) -->
-        <div class="bento-item tall" data-category="civile quota" data-src="images/civile_05.jpeg" data-title="Manutenzione Illuminazione Pubblica e Residenziale in Quota" data-desc="Tecnico specializzato Green Impianti con cestello elevatore aereo per la manutenzione, ripristino e relamping a LED di pali di illuminazione stradale e cortili.">
-          <span class="bento-tag">Illuminazione in Quota</span>
-          <img src="images/civile_05.jpeg" alt="Manutenzione Illuminazione Pubblica e Residenziale in Quota" loading="lazy"/>
+        <!-- 66. Centralino di Smistamento su Parete a Secco in Cartongesso -->
+        <div class="bento-item" data-category="civile quadri" data-src="images/civile_10.jpeg" data-title="Centralino di Smistamento su Parete a Secco in Cartongesso" data-desc="Telaio da incasso per pareti Gypsolignum con fasci cavi sagomati a scorta e singolarmente identificati per un montaggio a regola d'arte.">
+          <span class="bento-tag">Pareti Cartongesso</span>
+          <img src="images/civile_10.jpeg" alt="Centralino di Smistamento su Parete a Secco in Cartongesso" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Illuminazione & Pali in Quota</h4>
-            <p>Interventi con cestello aereo per illuminazione esterna e parchi residenziali.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Centralino di Smistamento su Parete a Secco in Cartongesso</h4>
+            <p>Telaio da incasso per pareti Gypsolignum con fasci cavi sagomati a scorta e singolarmente identificati per un montaggio a regola d'arte.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 17. Inverter Fotovoltaico Huawei -->
-        <div class="bento-item" data-category="fotovoltaico" data-src="images/media_1790350104097.jpg" data-title="Inverter Fotovoltaico Huawei su Struttura Tetto" data-desc="Inverter commerciale Huawei trifase con supporti zavorrati in cemento e canaline schermate per impianto fotovoltaico industriale.">
-          <span class="bento-tag">Inverter Huawei</span>
-          <img src="images/media_1790350104097.jpg" alt="Inverter Fotovoltaico Huawei su Struttura Tetto" loading="lazy"/>
-          <div class="bento-overlay">
-            <h4>Inverter Fotovoltaico Huawei</h4>
-            <p>Conversione solare ad altissima resa con tecnologia intelligente Huawei FusionSolar.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
-          </div>
-        </div>
-
-        <!-- 18. Impianto Sottofondo Nuova Costruzione -->
-        <div class="bento-item" data-category="civile" data-src="images/civile_07.jpeg" data-title="Impianto Sottofondo per Nuova Costruzione Residenziale" data-desc="Realizzazione completa dell'infrastruttura elettrica e predisposizioni per nuovo appartamento con pareti a secco prima della posa del massetto.">
+        <!-- 67. Impianto Sottofondo per Nuova Costruzione Residenziale -->
+        <div class="bento-item" data-category="civile" data-src="images/civile_07.jpeg" data-title="Impianto Sottofondo per Nuova Costruzione Residenziale" data-desc="Realizzazione completa dell'infrastruttura elettrica e predisposizioni domotiche in nuovo appartamento prima della posa del massetto.">
           <span class="bento-tag">Nuove Costruzioni</span>
           <img src="images/civile_07.jpeg" alt="Impianto Sottofondo per Nuova Costruzione Residenziale" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Nuove Costruzioni Civili</h4>
-            <p>Infrastruttura impiantistica completa predisposta per domotica e climatizzazione.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Impianto Sottofondo per Nuova Costruzione Residenziale</h4>
+            <p>Realizzazione completa dell'infrastruttura elettrica e predisposizioni domotiche in nuovo appartamento prima della posa del massetto.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 19. Impianto Fotovoltaico Industriale Tetto -->
-        <div class="bento-item" data-category="fotovoltaico" data-src="images/media_1790350104090.jpg" data-title="Impianto Fotovoltaico Industriale su Copertura" data-desc="Posa canalizzazioni, quadri di campo e collegamenti stringhe su copertura industriale impermeabilizzata.">
-          <span class="bento-tag">Fotovoltaico Industriale</span>
-          <img src="images/media_1790350104090.jpg" alt="Impianto Fotovoltaico Industriale su Copertura" loading="lazy"/>
-          <div class="bento-overlay">
-            <h4>Impianto Solare Tetto</h4>
-            <p>Cablaggio stringhe DC con canalizzazioni zincate e protezioni da intemperie.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
-          </div>
-        </div>
-
-        <!-- 20. Integrazione Elettrico & Riscaldamento a Pavimento -->
-        <div class="bento-item" data-category="civile" data-src="images/civile_08.jpeg" data-title="Coordinamento Tubazioni Elettriche con Collettore Riscaldamento a Pavimento" data-desc="Posa specializzata delle linee corrugate nel rispetto rigoroso delle distanze termiche dai collettori idronici dell'impianto radiante a pavimento.">
+        <!-- 68. Coordinamento Tubazioni Elettriche con Collettore Riscaldamento a Pavimento -->
+        <div class="bento-item" data-category="civile" data-src="images/civile_08.jpeg" data-title="Coordinamento Tubazioni Elettriche con Collettore Riscaldamento a Pavimento" data-desc="Posa specializzata delle linee corrugate nel rispetto rigoroso delle distanze termiche dai collettori idronici dell'impianto radiante.">
           <span class="bento-tag">Integrazione Impianti</span>
-          <img src="images/civile_08.jpeg" alt="Coordinamento Tubazioni Elettriche con Collettore Riscaldamento" loading="lazy"/>
+          <img src="images/civile_08.jpeg" alt="Coordinamento Tubazioni Elettriche con Collettore Riscaldamento a Pavimento" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Elettrico & Riscaldamento Radiante</h4>
-            <p>Perfetto coordinamento geometrico tra circuiti elettrici e collettori di riscaldamento.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Coordinamento Tubazioni Elettriche con Collettore Riscaldamento a Pavimento</h4>
+            <p>Posa specializzata delle linee corrugate nel rispetto rigoroso delle distanze termiche dai collettori idronici dell'impianto radiante.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 21. Centralino e Scatola su Parete in Cartongesso -->
-        <div class="bento-item" data-category="civile quadri" data-src="images/civile_10.jpeg" data-title="Centralino di Smistamento su Parete in Cartongesso" data-desc="Telaio da incasso per pareti a secco con fasci cavi sagomati a scorta e singolarmente identificati per un montaggio pulito a regola d'arte.">
-          <span class="bento-tag">Pareti Cartongesso</span>
-          <img src="images/civile_10.jpeg" alt="Centralino di Smistamento su Parete in Cartongesso" loading="lazy"/>
+        <!-- 69. Manutenzione Illuminazione Pubblica e Residenziale con Cestello -->
+        <div class="bento-item tall" data-category="civile quota" data-src="images/civile_05.jpeg" data-title="Manutenzione Illuminazione Pubblica e Residenziale con Cestello" data-desc="Tecnico specializzato Green Impianti su piattaforma a cestello per la manutenzione e il relamping a LED di corpi illuminanti su palo.">
+          <span class="bento-tag">Illuminazione in Quota</span>
+          <img src="images/civile_05.jpeg" alt="Manutenzione Illuminazione Pubblica e Residenziale con Cestello" loading="lazy"/>
           <div class="bento-overlay">
-            <h4>Centralino su Parete a Secco</h4>
-            <p>Fasci cavi sagomati a scorta per montaggio pulito ed espandibile nel tempo.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
+            <h4>Manutenzione Illuminazione Pubblica e Residenziale con Cestello</h4>
+            <p>Tecnico specializzato Green Impianti su piattaforma a cestello per la manutenzione e il relamping a LED di corpi illuminanti su palo.</p>
+            <span class="bento-view-btn"><i class="fas fa-bolt"></i> Ingrandisci Dettaglio</span>
           </div>
         </div>
 
-        <!-- 22. Torrette e Prese a Pavimento CEI -->
-        <div class="bento-item" data-category="uffici" data-src="images/media_1790350104110.jpg" data-title="Torrette e Scatole Prese Elettriche a Norma CEI" data-desc="Installazione di scatole a pavimento con prese Schuko e bivalenti per uffici direzionali e open space.">
-          <span class="bento-tag">Prese a Pavimento</span>
-          <img src="images/media_1790350104110.jpg" alt="Torrette e Scatole Prese Elettriche a Norma CEI" loading="lazy"/>
-          <div class="bento-overlay">
-            <h4>Torrette a Pavimento CEI</h4>
-            <p>Alimentazione a scomparsa con scatole calpestabili di massima sicurezza.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
-          </div>
-        </div>
-
-        <!-- 23. Cablaggio a Serpente Scrivanie Ufficio -->
-        <div class="bento-item" data-category="uffici" data-src="images/media_1790350104124.jpg" data-title="Cablaggio Flessibile Sagomato per Scrivanie Ufficio" data-desc="Guaine vertebrali snodate per la discesa cavi dati e potenza dal pavimento alle postazioni di lavoro operative.">
-          <span class="bento-tag">Reti & Scrivanie</span>
-          <img src="images/media_1790350104124.jpg" alt="Cablaggio Flessibile Sagomato per Scrivanie Ufficio" loading="lazy"/>
-          <div class="bento-overlay">
-            <h4>Cablaggio Postazioni Ufficio</h4>
-            <p>Gestione ordinata dei cavi con guaine a vertebra per postazioni moderne ed ergonomiche.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
-          </div>
-        </div>
-
-        <!-- 24. Distribuzione Linee Ufficio -->
-        <div class="bento-item" data-category="uffici" data-src="images/media_1790350104145.jpg" data-title="Distribuzione Elettrica e Reti per Uffici Operativi" data-desc="Allestimento completo di postazioni per uffici con cablaggio di rete strutturata e alimentazione protetta UPS.">
-          <span class="bento-tag">Infrastruttura Uffici</span>
-          <img src="images/media_1790350104145.jpg" alt="Distribuzione Elettrica e Reti per Uffici Operativi" loading="lazy"/>
-          <div class="bento-overlay">
-            <h4>Distribuzione Linee Ufficio</h4>
-            <p>Infrastruttura elettrica e dati chiavi in mano per ambienti lavorativi professionali.</p>
-            <span class="bento-view-btn"><i class="fas fa-expand"></i> Ingrandisci Dettaglio</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1332,7 +1830,7 @@
           <div id="lightbox-caption" class="lightbox-caption"></div>
           <div id="lightbox-desc" style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-top:4px;"></div>
         </div>
-        <div id="lightbox-counter" class="lightbox-counter">1 / 14</div>
+        <div id="lightbox-counter" class="lightbox-counter">1 / 69</div>
       </div>
     </div>
   </div>
@@ -1350,6 +1848,9 @@
     <i class="fas fa-circle-check" style="font-size:1.3rem;color:var(--accent-gold);"></i>
     <span>Richiesta inviata con successo! Ti contatteremo a breve.</span>
   </div>
+
+  <!-- GLOBAL TOUCH & CLICK ELECTRIC SPARK CANVAS -->
+  <canvas id="electric-spark-canvas" class="electric-spark-canvas" aria-hidden="true"></canvas>
 
   <script src="main.js"></script>
 </body>

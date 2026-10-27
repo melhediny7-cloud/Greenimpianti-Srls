@@ -247,4 +247,392 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // --- 7. Background Lightning Atmospheric Canvas ---
+  function initLightningBackground() {
+    const canvas = document.getElementById('lightning-canvas');
+    const hero = document.getElementById('hero');
+    if (!canvas || !hero) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = hero.offsetWidth);
+    let height = (canvas.height = hero.offsetHeight);
+    let animationFrameId = null;
+    let isPaused = false;
+
+    const resize = () => {
+      width = canvas.width = hero.offsetWidth;
+      height = canvas.height = hero.offsetHeight;
+    };
+    window.addEventListener('resize', resize);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    // Ambient Ionized Electrical Particles
+    const particleCount = Math.min(26, Math.max(12, Math.floor(width / 50)));
+    const particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.8 + 0.8,
+        baseAlpha: Math.random() * 0.4 + 0.2,
+        pulse: Math.random() * Math.PI,
+        color: Math.random() > 0.4 ? '#4ade80' : '#f59e0b'
+      });
+    }
+
+    // Active Lightning Bolts Queue
+    const activeBolts = [];
+    let flashAlpha = 0;
+
+    function createLightningBranch(x1, y1, x2, y2, displacement, iterations) {
+      if (iterations === 0) {
+        return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+      }
+      const midX = (x1 + x2) / 2 + (Math.random() - 0.5) * displacement;
+      const midY = (y1 + y2) / 2 + (Math.random() - 0.5) * displacement;
+      const left = createLightningBranch(x1, y1, midX, midY, displacement / 1.85, iterations - 1);
+      const right = createLightningBranch(midX, midY, x2, y2, displacement / 1.85, iterations - 1);
+      return left.concat(right.slice(1));
+    }
+
+    function triggerLightning(startX, startY, endX, endY) {
+      const x1 = startX !== undefined ? startX : Math.random() * width * 0.8 + width * 0.1;
+      const y1 = startY !== undefined ? startY : 0;
+      const x2 = endX !== undefined ? endX : x1 + (Math.random() - 0.5) * width * 0.5;
+      const y2 = endY !== undefined ? endY : Math.random() * (height * 0.5) + height * 0.45;
+
+      const mainPath = createLightningBranch(x1, y1, x2, y2, Math.min(width, height) * 0.18, 5);
+      const childBranches = [];
+
+      for (let i = 0; i < mainPath.length; i += 7) {
+        if (Math.random() > 0.45 && i > 4 && i < mainPath.length - 4) {
+          const p = mainPath[i];
+          const angle = (Math.random() - 0.5) * 1.2 + Math.PI / 2;
+          const forkLen = Math.random() * 110 + 50;
+          const forkEndX = p.x + Math.sin(angle) * forkLen;
+          const forkEndY = p.y + Math.cos(angle) * forkLen;
+          childBranches.push(createLightningBranch(p.x, p.y, forkEndX, forkEndY, 35, 3));
+        }
+      }
+
+      activeBolts.push({
+        mainPath,
+        childBranches,
+        life: 1.0,
+        decay: 0.05 + Math.random() * 0.03,
+        color: Math.random() > 0.35 ? 'emerald' : 'gold'
+      });
+
+      flashAlpha = Math.min(0.18, flashAlpha + 0.12);
+    }
+
+    let lastBoltTime = performance.now();
+    let nextBoltDelay = 4500 + Math.random() * 3000;
+
+    // Interactive Strike when clicking or tapping in Hero area
+    hero.addEventListener('pointerdown', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      triggerLightning(clickX + (Math.random() - 0.5) * 200, 0, clickX, clickY);
+    }, { passive: true });
+
+    function loop(time) {
+      if (isPaused) {
+        animationFrameId = requestAnimationFrame(loop);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Ambient Flash
+      if (flashAlpha > 0.005) {
+        ctx.fillStyle = `rgba(16, 185, 129, ${flashAlpha * 0.6})`;
+        ctx.fillRect(0, 0, width, height);
+        flashAlpha *= 0.88;
+      }
+
+      // 2. Ionized Particles & Electrical Network Arcs
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.pulse += 0.025;
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        const alpha = p.baseAlpha + Math.sin(p.pulse) * 0.15;
+        ctx.fillStyle = p.color === '#4ade80' ? `rgba(74, 222, 128, ${alpha})` : `rgba(245, 158, 11, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 80) {
+            const lineAlpha = (1 - dist / 80) * 0.16;
+            ctx.strokeStyle = `rgba(74, 222, 128, ${lineAlpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 3. Periodic Trigger Check
+      if (time - lastBoltTime > nextBoltDelay) {
+        triggerLightning();
+        lastBoltTime = time;
+        nextBoltDelay = 4500 + Math.random() * 3500;
+      }
+
+      // 4. Render Active Lightning Bolts
+      for (let b = activeBolts.length - 1; b >= 0; b--) {
+        const bolt = activeBolts[b];
+        const paths = [bolt.mainPath, ...bolt.childBranches];
+        const flicker = (Math.sin(bolt.life * 18) > 0.2 ? 1 : 0.6) * bolt.life;
+
+        ctx.save();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'miter';
+
+        paths.forEach((path, pathIdx) => {
+          if (!path || path.length < 2) return;
+          const isMain = pathIdx === 0;
+
+          // Outer glow
+          ctx.strokeStyle = bolt.color === 'emerald'
+            ? `rgba(56, 189, 248, ${0.45 * flicker})`
+            : `rgba(245, 158, 11, ${0.45 * flicker})`;
+          ctx.lineWidth = isMain ? 7 : 3.5;
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y);
+          ctx.stroke();
+
+          // Mid vibrant beam
+          ctx.strokeStyle = bolt.color === 'emerald'
+            ? `rgba(74, 222, 128, ${0.85 * flicker})`
+            : `rgba(251, 191, 36, ${0.85 * flicker})`;
+          ctx.lineWidth = isMain ? 2.8 : 1.5;
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y);
+          ctx.stroke();
+
+          // Inner pure white electric core
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.95 * flicker})`;
+          ctx.lineWidth = isMain ? 1.2 : 0.7;
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          for (let i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y);
+          ctx.stroke();
+        });
+
+        ctx.restore();
+
+        bolt.life -= bolt.decay;
+        if (bolt.life <= 0) {
+          activeBolts.splice(b, 1);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(loop);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isPaused = !entry.isIntersecting;
+        });
+      }, { threshold: 0.05 });
+      observer.observe(hero);
+    }
+
+    animationFrameId = requestAnimationFrame(loop);
+  }
+
+  // --- 8. Global Electric Touch & Click Spark System ---
+  function initElectricTouchAndClickSparks() {
+    const canvas = document.getElementById('electric-spark-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const sparks = [];
+    const rings = [];
+    let isAnimating = false;
+
+    function createSparkDischarge(x, y) {
+      const numBranches = 5 + Math.floor(Math.random() * 3);
+      const branchPoints = [];
+
+      for (let b = 0; b < numBranches; b++) {
+        const angle = (b / numBranches) * Math.PI * 2 + (Math.random() - 0.5) * 0.6;
+        const len = 25 + Math.random() * 35;
+        const steps = 4;
+        const pts = [{ x, y }];
+
+        let currX = x;
+        let currY = y;
+        for (let s = 1; s <= steps; s++) {
+          const segLen = len / steps;
+          currX += Math.cos(angle) * segLen + (Math.random() - 0.5) * 12;
+          currY += Math.sin(angle) * segLen + (Math.random() - 0.5) * 12;
+          pts.push({ x: currX, y: currY });
+        }
+        branchPoints.push(pts);
+      }
+
+      const particles = [];
+      const particleCount = 10;
+      for (let p = 0; p < particleCount; p++) {
+        const a = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 3.5 + 1.2;
+        particles.push({
+          x,
+          y,
+          vx: Math.cos(a) * speed,
+          vy: Math.sin(a) * speed,
+          life: 1.0,
+          decay: 0.06 + Math.random() * 0.04,
+          size: Math.random() * 2 + 1,
+          color: Math.random() > 0.5 ? '#f59e0b' : '#38bdf8'
+        });
+      }
+
+      sparks.push({
+        branchPoints,
+        particles,
+        life: 1.0,
+        decay: 0.09
+      });
+
+      rings.push({
+        x,
+        y,
+        r: 4,
+        maxR: 30,
+        alpha: 0.85
+      });
+
+      if (!isAnimating) {
+        isAnimating = true;
+        requestAnimationFrame(renderSparks);
+      }
+    }
+
+    // Both touchscreen taps on mobile and mouse clicks on desktop
+    window.addEventListener('pointerdown', (e) => {
+      createSparkDischarge(e.clientX, e.clientY);
+    }, { passive: true });
+
+    function renderSparks() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Expanding rings
+      for (let i = rings.length - 1; i >= 0; i--) {
+        const ring = rings[i];
+        ring.r += (ring.maxR - ring.r) * 0.22 + 1.2;
+        ring.alpha *= 0.84;
+
+        ctx.save();
+        ctx.strokeStyle = `rgba(56, 189, 248, ${ring.alpha})`;
+        ctx.lineWidth = 1.5;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#10b981';
+        ctx.beginPath();
+        ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+
+        if (ring.alpha < 0.02 || ring.r >= ring.maxR) {
+          rings.splice(i, 1);
+        }
+      }
+
+      // Branching electric sparks
+      for (let s = sparks.length - 1; s >= 0; s--) {
+        const spark = sparks[s];
+
+        ctx.save();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'miter';
+
+        spark.branchPoints.forEach((pts) => {
+          ctx.strokeStyle = `rgba(56, 189, 248, ${0.5 * spark.life})`;
+          ctx.lineWidth = 4;
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = '#38bdf8';
+          ctx.beginPath();
+          ctx.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+          ctx.stroke();
+
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.95 * spark.life})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+          ctx.stroke();
+        });
+
+        spark.particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.94;
+          p.vy *= 0.94;
+          p.life -= p.decay;
+
+          if (p.life > 0) {
+            ctx.fillStyle = p.color;
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+
+        ctx.restore();
+
+        spark.life -= spark.decay;
+        if (spark.life <= 0 && spark.particles.every(p => p.life <= 0)) {
+          sparks.splice(s, 1);
+        }
+      }
+
+      if (sparks.length > 0 || rings.length > 0) {
+        requestAnimationFrame(renderSparks);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+        isAnimating = false;
+      }
+    }
+  }
+
+  // Initialize atmospheric background and interactive electric effects
+  initLightningBackground();
+  initElectricTouchAndClickSparks();
+
 });
