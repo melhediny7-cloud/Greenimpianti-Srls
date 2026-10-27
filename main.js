@@ -89,6 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterPills = document.querySelectorAll('.filter-pill');
   const bentoItems = document.querySelectorAll('.bento-item');
 
+  const getVisibleItems = () => {
+    const visible = Array.from(bentoItems).filter(item => !item.classList.contains('hidden'));
+    return visible.length > 0 ? visible : Array.from(bentoItems);
+  };
+
   filterPills.forEach(pill => {
     pill.addEventListener('click', () => {
       filterPills.forEach(p => p.classList.remove('active'));
@@ -97,8 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const filter = pill.getAttribute('data-filter');
 
       bentoItems.forEach(item => {
-        const cat = item.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
+        const cat = item.getAttribute('data-category') || '';
+        const cats = cat.split(/\s+/);
+        if (filter === 'all' || cats.includes(filter)) {
           item.classList.remove('hidden');
         } else {
           item.classList.add('hidden');
@@ -118,14 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxNext = document.getElementById('lightbox-next');
 
   let activeIndex = 0;
-  const itemArray = Array.from(bentoItems);
 
   const updateLightbox = (index) => {
-    if (index < 0) index = itemArray.length - 1;
-    if (index >= itemArray.length) index = 0;
+    const currentItems = getVisibleItems();
+    if (currentItems.length === 0) return;
+    if (index < 0) index = currentItems.length - 1;
+    if (index >= currentItems.length) index = 0;
     activeIndex = index;
 
-    const item = itemArray[activeIndex];
+    const item = currentItems[activeIndex];
+    if (!item) return;
     const src = item.getAttribute('data-src') || item.querySelector('img').src;
     const title = item.getAttribute('data-title') || item.querySelector('h4').textContent;
     const desc = item.getAttribute('data-desc') || '';
@@ -134,12 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImg.alt = title;
     lightboxCaption.textContent = title;
     lightboxDesc.textContent = desc;
-    lightboxCounter.textContent = (activeIndex + 1) + ' / ' + itemArray.length;
+    lightboxCounter.textContent = (activeIndex + 1) + ' / ' + currentItems.length;
   };
 
-  itemArray.forEach((item, index) => {
+  bentoItems.forEach((item) => {
     item.addEventListener('click', () => {
-      updateLightbox(index);
+      const currentItems = getVisibleItems();
+      const index = currentItems.indexOf(item);
+      updateLightbox(index >= 0 ? index : 0);
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -168,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
+    if (!lightbox || !lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') updateLightbox(activeIndex - 1);
     if (e.key === 'ArrowRight') updateLightbox(activeIndex + 1);
@@ -217,4 +227,24 @@ document.addEventListener('DOMContentLoaded', () => {
       contactForm.reset();
     });
   }
+  // Close mobile menu on window resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1080 && mobileMenu && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      const spans = hamburger.querySelectorAll('span');
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu && mobileMenu.classList.contains('open')) {
+      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        const spans = hamburger.querySelectorAll('span');
+        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      }
+    }
+  });
+
 });
