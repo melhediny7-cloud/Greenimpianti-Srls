@@ -335,6 +335,75 @@ nav ul a:hover, nav ul a.active {
   overflow: hidden;
 }
 
+/* Ambient Video Background */
+.hero-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(0.55) contrast(1.15) saturate(1.1);
+  transform: scale(1.02);
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    145deg,
+    rgba(7, 31, 13, 0.82) 0%,
+    rgba(13, 56, 23, 0.68) 50%,
+    rgba(18, 87, 37, 0.62) 100%
+  );
+  z-index: 1;
+}
+
+/* Video Control (Play/Pause) */
+.hero-video-control {
+  position: absolute;
+  bottom: 22px;
+  right: 28px;
+  z-index: 10;
+  background: rgba(7, 31, 13, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.hero-video-control:hover {
+  background: var(--primary-green);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.5);
+}
+
 .hero-glow-1 {
   position: absolute;
   top: -150px;
@@ -343,6 +412,7 @@ nav ul a:hover, nav ul a.active {
   height: 550px;
   background: radial-gradient(circle, rgba(74, 222, 128, 0.16) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero-glow-2 {
@@ -353,6 +423,7 @@ nav ul a:hover, nav ul a.active {
   height: 480px;
   background: radial-gradient(circle, rgba(245, 158, 11, 0.14) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Background Lightning & Atmospheric Canvas */
@@ -363,7 +434,7 @@ nav ul a:hover, nav ul a.active {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
   opacity: 0.95;
 }
 
@@ -386,7 +457,7 @@ nav ul a:hover, nav ul a.active {
   gap: 60px;
   align-items: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-tag {
@@ -1368,6 +1439,74 @@ nav ul a:hover, nav ul a.active {
 .btn-form-submit:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 28px rgba(27, 122, 52, 0.45);
+}
+
+.btn-form-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Form Delivery Notice & Status Alerts */
+.form-delivery-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0f7f2;
+  border: 1px solid rgba(27, 122, 52, 0.22);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  color: var(--primary-dark);
+  margin-bottom: 22px;
+}
+
+.form-delivery-badge i {
+  color: var(--primary-green);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.form-delivery-badge strong {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.form-status-alert {
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeInDown 0.3s ease;
+}
+
+.form-status-alert.loading {
+  background: #eef5ff;
+  color: #1a56db;
+  border: 1px solid #bfdbfe;
+}
+
+.form-status-alert.success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1.5px solid #10b981;
+}
+
+.form-status-alert.error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.form-status-alert.fallback {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
 }
 
 /* --------------------------------------------------------------------------
@@ -2755,6 +2894,13 @@ html, body {
 @media (max-width: 480px) {
   #hero {
     padding: 60px 5% 80px;
+  }
+  .hero-video-control {
+    bottom: 12px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    font-size: 0.75rem;
   }
   .hero-title {
     font-size: 1.95rem;

@@ -67,6 +67,20 @@
 
   <!-- HERO SECTION -->
   <section id="hero">
+    <!-- Ambient Video Background -->
+    <div class="hero-video-wrapper" aria-hidden="true">
+      <video id="hero-bg-video" class="hero-bg-video" autoplay muted loop playsinline preload="auto">
+        <source src="background-video.mp4" type="video/mp4"/>
+        <source src="WhatsApp%20Video%202026-10-30%20at%2011.53.51%20PM.mp4" type="video/mp4"/>
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+
+    <!-- Video Play/Pause Control Button -->
+    <button class="hero-video-control" id="hero-video-toggle" aria-label="Metti in pausa o riproduci video" title="Pausa / Play Video">
+      <i class="fas fa-pause"></i>
+    </button>
+
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
     <!-- Ambient Electricity & Background Lightning Canvas -->
@@ -1680,7 +1694,18 @@
           <h3>Invia una Richiesta di Preventivo</h3>
           <p>Compila il form sottostante. Ti risponderemo con un'analisi tecnica preliminare entro 24 ore.</p>
 
-          <form id="contact-form">
+          <div class="form-delivery-badge">
+            <i class="fas fa-envelope-circle-check"></i>
+            <span>Tutte le richieste vengono inoltrate direttamente a: <strong>greenimpianti225@gmail.com</strong></span>
+          </div>
+
+          <div id="form-status-alert" class="form-status-alert" style="display:none;" role="alert"></div>
+
+          <form id="contact-form" action="https://formsubmit.co/greenimpianti225@gmail.com" method="POST">
+            <!-- FormSubmit & Email Configuration -->
+            <input type="hidden" name="_captcha" value="false"/>
+            <input type="hidden" name="_template" value="table"/>
+            <input type="hidden" name="_subject" value="Nuova Richiesta Preventivo - Green Impianti SrlS"/>
             <div class="form-grid-2">
               <div class="form-field">
                 <label for="nome">Nome *</label>

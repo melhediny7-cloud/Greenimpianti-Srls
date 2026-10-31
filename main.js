@@ -184,13 +184,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') updateLightbox(activeIndex + 1);
   });
 
-  // --- 6. Contact Form Processing ---
+  // --- 6. Contact Form Processing (Direct Delivery to greenimpianti225@gmail.com) ---
   const contactForm = document.getElementById('contact-form');
   const toast = document.getElementById('toast');
+  const formStatus = document.getElementById('form-status-alert');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('.btn-form-submit');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
 
       const nome = contactForm.nome.value.trim();
       const cognome = contactForm.cognome.value.trim();
@@ -198,33 +202,97 @@ document.addEventListener('DOMContentLoaded', () => {
       const telefono = contactForm.telefono.value.trim();
       const servizio = contactForm.servizio.value;
       const messaggio = contactForm.messaggio.value.trim();
+      const privacy = contactForm.privacy ? contactForm.privacy.checked : true;
 
-      if (!nome || !cognome || !email || !telefono || !messaggio) {
-        alert('Per favore compila tutti i campi obbligatori (*).');
+      if (!nome || !cognome || !email || !telefono || !servizio || !messaggio) {
+        if (formStatus) {
+          formStatus.style.display = 'flex';
+          formStatus.className = 'form-status-alert error';
+          formStatus.innerHTML = '<i class="fas fa-triangle-exclamation"></i><span>Per favore compila tutti i campi obbligatori contrassegnati con (*).</span>';
+        } else {
+          alert('Per favore compila tutti i campi obbligatori (*).');
+        }
         return;
       }
 
-      // Generate mailto link
-      const subject = encodeURIComponent('Richiesta Preventivo: ' + servizio + ' - ' + nome + ' ' + cognome);
-      const body = encodeURIComponent(
-        'Nuova richiesta preventivo dal sito web:\n\n' +
-        'Nome: ' + nome + ' ' + cognome + '\n' +
-        'Email: ' + email + '\n' +
-        'Telefono: ' + telefono + '\n' +
-        'Tipologia Intervento: ' + servizio + '\n\n' +
-        'Dettagli Progetto:\n' + messaggio
-      );
-
-      // Trigger mail client
-      window.location.href = 'mailto:greenimpianti225@gmail.com?subject=' + subject + '&body=' + body;
-
-      // Show toast
-      if (toast) {
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 5000);
+      if (!privacy) {
+        if (formStatus) {
+          formStatus.style.display = 'flex';
+          formStatus.className = 'form-status-alert error';
+          formStatus.innerHTML = '<i class="fas fa-triangle-exclamation"></i><span>È necessario autorizzare il trattamento dei dati personali (GDPR).</span>';
+        }
+        return;
       }
 
-      contactForm.reset();
+      // Set loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Inoltro a greenimpianti225@gmail.com...';
+      }
+
+      if (formStatus) {
+        formStatus.style.display = 'flex';
+        formStatus.className = 'form-status-alert loading';
+        formStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Invio della richiesta all\'indirizzo <strong>greenimpianti225@gmail.com</strong> in corso...</span>';
+      }
+
+      const mailtoLink = 'mailto:greenimpianti225@gmail.com?subject=' +
+        encodeURIComponent('Richiesta Preventivo [' + servizio + '] - ' + nome + ' ' + cognome) +
+        '&body=' + encodeURIComponent(
+          'Nuova richiesta preventivo da sito web Green Impianti SrlS:\n\n' +
+          'Nome: ' + nome + ' ' + cognome + '\n' +
+          'Email Mittente: ' + email + '\n' +
+          'Telefono: ' + telefono + '\n' +
+          'Tipologia Intervento: ' + servizio + '\n\n' +
+          'Dettagli del Progetto:\n' + messaggio + '\n\n' +
+          'Destinazione: greenimpianti225@gmail.com'
+        );
+
+      try {
+        const formData = new FormData(contactForm);
+        formData.set('_subject', 'Nuova Richiesta Preventivo [' + servizio + '] - ' + nome + ' ' + cognome);
+        formData.set('_replyto', email);
+
+        // Send via AJAX to FormSubmit endpoint configured for greenimpianti225@gmail.com
+        const response = await fetch('https://formsubmit.co/ajax/greenimpianti225@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        });
+
+        if (response.ok) {
+          if (formStatus) {
+            formStatus.style.display = 'flex';
+            formStatus.className = 'form-status-alert success';
+            formStatus.innerHTML = '<i class="fas fa-circle-check" style="color:#10b981;font-size:1.3rem;"></i><span><strong>Richiesta inoltrata con successo!</strong> L\'email è stata recapitata all\'ufficio tecnico (<em>greenimpianti225@gmail.com</em>). Ti risponderemo con un\'analisi preliminare entro 24 ore.</span>';
+          }
+          if (toast) {
+            const toastSpan = toast.querySelector('span');
+            if (toastSpan) toastSpan.textContent = 'Richiesta inoltrata con successo a greenimpianti225@gmail.com!';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 6000);
+          }
+          contactForm.reset();
+        } else {
+          throw new Error('Server returned ' + response.status);
+        }
+      } catch (err) {
+        // Fallback for adblocker/offline/CORS restrictions: Open direct email client prefilled to greenimpianti225@gmail.com
+        console.warn('Fallback email delivery:', err);
+        if (formStatus) {
+          formStatus.style.display = 'flex';
+          formStatus.className = 'form-status-alert fallback';
+          formStatus.innerHTML = '<i class="fas fa-envelope-circle-check"></i><span>Apertura client di posta per l\'invio a <strong>greenimpianti225@gmail.com</strong>... Se il messaggio non si apre, puoi scrivere direttamente a <a href="' + mailtoLink + '" style="color:#007a33;text-decoration:underline;font-weight:700;">greenimpianti225@gmail.com</a>.</span>';
+        }
+        window.location.href = mailtoLink;
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+        }
+      }
     });
   }
   // Close mobile menu on window resize to desktop
@@ -631,8 +699,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- 9. Hero Background Video Controller ---
+  function initHeroBackgroundVideo() {
+    const video = document.getElementById('hero-bg-video');
+    const toggleBtn = document.getElementById('hero-video-toggle');
+    const hero = document.getElementById('hero');
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+
+    // Autoplay trigger
+    const startPlay = () => {
+      const p = video.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          // Autoplay policy fallback on user interaction
+          const unlock = () => {
+            if (!toggleBtn || !toggleBtn.classList.contains('manual-paused')) {
+              video.play().catch(() => {});
+            }
+            window.removeEventListener('click', unlock);
+            window.removeEventListener('touchstart', unlock);
+          };
+          window.addEventListener('click', unlock, { once: true });
+          window.addEventListener('touchstart', unlock, { once: true });
+        });
+      }
+    };
+    startPlay();
+
+    // Toggle button handler
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (video.paused) {
+          toggleBtn.classList.remove('manual-paused');
+          video.play().catch(() => {});
+          toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          toggleBtn.setAttribute('aria-label', 'Metti in pausa video');
+          toggleBtn.setAttribute('title', 'Pausa Video');
+        } else {
+          toggleBtn.classList.add('manual-paused');
+          video.pause();
+          toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+          toggleBtn.setAttribute('aria-label', 'Riproduci video');
+          toggleBtn.setAttribute('title', 'Riproduci Video');
+        }
+      });
+    }
+
+    // Pause video when scrolled out of view to save battery and performance
+    if ('IntersectionObserver' in window && hero) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!toggleBtn || !toggleBtn.classList.contains('manual-paused')) {
+              video.play().catch(() => {});
+            }
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(hero);
+    }
+  }
+
   // Initialize atmospheric background and interactive electric effects
   initLightningBackground();
   initElectricTouchAndClickSparks();
+  initHeroBackgroundVideo();
 
 });
