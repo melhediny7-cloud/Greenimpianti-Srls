@@ -1,0 +1,9 @@
+{
+  "name": "greenimpianti-srls",
+  "version": "1.0.0",
+  "description": "Green Impianti SrlS - Official Website",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static assets ready for deployment'"
+  }
+}
