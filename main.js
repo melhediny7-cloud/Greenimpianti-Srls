@@ -322,32 +322,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!canvas || !hero) return;
 
     const ctx = canvas.getContext('2d');
-    let width = (canvas.width = hero.offsetWidth);
-    let height = (canvas.height = hero.offsetHeight);
+    let width = (canvas.width = hero.offsetWidth || window.innerWidth);
+    let height = (canvas.height = hero.offsetHeight || 600);
     let animationFrameId = null;
     let isPaused = false;
 
     const resize = () => {
-      width = canvas.width = hero.offsetWidth;
-      height = canvas.height = hero.offsetHeight;
+      width = canvas.width = hero.offsetWidth || window.innerWidth;
+      height = canvas.height = hero.offsetHeight || 600;
     };
     window.addEventListener('resize', resize);
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
+    window.addEventListener('load', resize);
 
     // Ambient Ionized Electrical Particles
-    const particleCount = Math.min(26, Math.max(12, Math.floor(width / 50)));
+    const particleCount = Math.min(32, Math.max(16, Math.floor(width / 40)));
     const particles = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.8 + 0.8,
-        baseAlpha: Math.random() * 0.4 + 0.2,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        r: Math.random() * 2.2 + 1.0,
+        baseAlpha: Math.random() * 0.45 + 0.25,
         pulse: Math.random() * Math.PI,
         color: Math.random() > 0.4 ? '#4ade80' : '#f59e0b'
       });
@@ -374,17 +371,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const x2 = endX !== undefined ? endX : x1 + (Math.random() - 0.5) * width * 0.5;
       const y2 = endY !== undefined ? endY : Math.random() * (height * 0.5) + height * 0.45;
 
-      const mainPath = createLightningBranch(x1, y1, x2, y2, Math.min(width, height) * 0.18, 5);
+      const mainPath = createLightningBranch(x1, y1, x2, y2, Math.min(width, height) * 0.2, 5);
       const childBranches = [];
 
-      for (let i = 0; i < mainPath.length; i += 7) {
-        if (Math.random() > 0.45 && i > 4 && i < mainPath.length - 4) {
+      for (let i = 0; i < mainPath.length; i += 6) {
+        if (Math.random() > 0.4 && i > 3 && i < mainPath.length - 3) {
           const p = mainPath[i];
-          const angle = (Math.random() - 0.5) * 1.2 + Math.PI / 2;
-          const forkLen = Math.random() * 110 + 50;
+          const angle = (Math.random() - 0.5) * 1.3 + Math.PI / 2;
+          const forkLen = Math.random() * 120 + 55;
           const forkEndX = p.x + Math.sin(angle) * forkLen;
           const forkEndY = p.y + Math.cos(angle) * forkLen;
-          childBranches.push(createLightningBranch(p.x, p.y, forkEndX, forkEndY, 35, 3));
+          childBranches.push(createLightningBranch(p.x, p.y, forkEndX, forkEndY, 38, 3));
         }
       }
 
@@ -392,22 +389,39 @@ document.addEventListener('DOMContentLoaded', () => {
         mainPath,
         childBranches,
         life: 1.0,
-        decay: 0.05 + Math.random() * 0.03,
+        decay: 0.045 + Math.random() * 0.02,
         color: Math.random() > 0.35 ? 'emerald' : 'gold'
       });
 
-      flashAlpha = Math.min(0.18, flashAlpha + 0.12);
+      flashAlpha = Math.min(0.28, flashAlpha + 0.18);
     }
 
-    let lastBoltTime = performance.now();
-    let nextBoltDelay = 4500 + Math.random() * 3000;
+    // Trigger initial strikes immediately so the effect is unmissable on page load
+    setTimeout(() => {
+      triggerLightning(width * 0.32, 0, width * 0.45, height * 0.7);
+    }, 250);
+    setTimeout(() => {
+      triggerLightning(width * 0.74, 0, width * 0.65, height * 0.65);
+    }, 850);
 
-    // Interactive Strike when clicking or tapping in Hero area
-    hero.addEventListener('pointerdown', (e) => {
+    let lastBoltTime = performance.now();
+    let nextBoltDelay = 2200 + Math.random() * 2000;
+
+    // Interactive Strike when clicking or tapping anywhere in Hero area (even on cards or text)
+    document.addEventListener('pointerdown', (e) => {
+      if (!hero) return;
       const rect = hero.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
-      triggerLightning(clickX + (Math.random() - 0.5) * 200, 0, clickX, clickY);
+      if (e.clientY >= rect.top && e.clientY <= rect.bottom && e.clientX >= rect.left && e.clientX <= rect.right) {
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        triggerLightning(clickX + (Math.random() - 0.5) * 150, 0, clickX, clickY);
+        // Double pulse thunder
+        setTimeout(() => {
+          if (!isPaused) {
+            triggerLightning(clickX + (Math.random() - 0.5) * 60, 0, clickX, clickY);
+          }
+        }, 130);
+      }
     }, { passive: true });
 
     function loop(time) {
@@ -615,6 +629,38 @@ document.addEventListener('DOMContentLoaded', () => {
       createSparkDischarge(e.clientX, e.clientY);
     }, { passive: true });
 
+    // Subtle electric aura trailing the mouse cursor on desktop
+    let lastMoveTime = 0;
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const now = performance.now();
+      if (now - lastMoveTime < 45) return;
+      lastMoveTime = now;
+
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 6;
+      sparks.push({
+        branchPoints: [],
+        particles: [{
+          x: e.clientX + Math.cos(angle) * dist,
+          y: e.clientY + Math.sin(angle) * dist,
+          vx: (Math.random() - 0.5) * 1.0,
+          vy: (Math.random() - 0.5) * 1.0,
+          life: 0.8,
+          decay: 0.07,
+          size: Math.random() * 2 + 1.2,
+          color: Math.random() > 0.4 ? '#4ade80' : '#f59e0b'
+        }],
+        life: 0.8,
+        decay: 0.07
+      });
+
+      if (!isAnimating) {
+        isAnimating = true;
+        requestAnimationFrame(renderSparks);
+      }
+    }, { passive: true });
+
     function renderSparks() {
       ctx.clearRect(0, 0, width, height);
 
@@ -710,25 +756,51 @@ document.addEventListener('DOMContentLoaded', () => {
     video.defaultMuted = true;
     video.playsInline = true;
 
-    // Autoplay trigger
-    const startPlay = () => {
+    // Autoplay trigger with robust fallback
+    const syncButtonState = () => {
+      if (!toggleBtn) return;
+      if (video.paused) {
+        toggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+        toggleBtn.setAttribute('aria-label', 'Riproduci video');
+        toggleBtn.setAttribute('title', 'Riproduci Video');
+      } else {
+        toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        toggleBtn.setAttribute('aria-label', 'Metti in pausa video');
+        toggleBtn.setAttribute('title', 'Pausa Video');
+      }
+    };
+
+    video.addEventListener('play', syncButtonState);
+    video.addEventListener('pause', syncButtonState);
+    video.addEventListener('playing', syncButtonState);
+
+    const triggerPlay = () => {
+      if (toggleBtn && toggleBtn.classList.contains('manual-paused')) return;
+      video.muted = true;
+      video.defaultMuted = true;
       const p = video.play();
       if (p !== undefined) {
-        p.catch(() => {
-          // Autoplay policy fallback on user interaction
+        p.then(syncButtonState).catch(() => {
+          syncButtonState();
+          // Autoplay policy fallback: unlock on any first user interaction
           const unlock = () => {
             if (!toggleBtn || !toggleBtn.classList.contains('manual-paused')) {
-              video.play().catch(() => {});
+              video.muted = true;
+              video.play().then(syncButtonState).catch(() => {});
             }
-            window.removeEventListener('click', unlock);
-            window.removeEventListener('touchstart', unlock);
           };
           window.addEventListener('click', unlock, { once: true });
           window.addEventListener('touchstart', unlock, { once: true });
+          window.addEventListener('scroll', unlock, { once: true });
+          window.addEventListener('mousemove', unlock, { once: true });
+          window.addEventListener('pointerdown', unlock, { once: true });
         });
       }
     };
-    startPlay();
+
+    triggerPlay();
+    video.addEventListener('canplay', triggerPlay);
+    video.addEventListener('loadeddata', triggerPlay);
 
     // Toggle button handler
     if (toggleBtn) {
@@ -736,6 +808,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         if (video.paused) {
           toggleBtn.classList.remove('manual-paused');
+          video.muted = true;
           video.play().catch(() => {});
           toggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
           toggleBtn.setAttribute('aria-label', 'Metti in pausa video');
@@ -750,19 +823,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Pause video when scrolled out of view to save battery and performance
+    // Only pause video when scrolled significantly past hero section
     if ('IntersectionObserver' in window && hero) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             if (!toggleBtn || !toggleBtn.classList.contains('manual-paused')) {
+              video.muted = true;
               video.play().catch(() => {});
             }
           } else {
-            video.pause();
+            // Only pause if actually scrolled below hero section
+            if (window.scrollY > 350) {
+              video.pause();
+            }
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.05 });
       observer.observe(hero);
     }
   }
