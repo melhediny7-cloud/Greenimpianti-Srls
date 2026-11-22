@@ -139,6 +139,66 @@ a, a *, button, button *, [role="button"], [role="button"] *, .bento-item, .bent
   box-shadow: 0 0 8px var(--accent-mint);
 }
 
+.top-social-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: #ffffff !important;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.top-fb-pill {
+  background: linear-gradient(135deg, #1877f2 0%, #0d65d9 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35);
+}
+
+.top-fb-pill:hover {
+  background: linear-gradient(135deg, #2b84f6 0%, #1570e6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.55);
+}
+
+.top-wa-pill {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.top-wa-pill:hover {
+  background: linear-gradient(135deg, #2fe671 0%, #15a191 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.55);
+}
+
+.top-social-pill i {
+  font-size: 0.92rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.top-social-pill .pill-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.top-social-pill:hover .pill-glow {
+  left: 100%;
+}
+
 .top-whatsapp-btn {
   background: #25d366;
   color: #ffffff;
@@ -203,6 +263,51 @@ a, a *, button, button *, [role="button"], [role="button"] *, .bento-item, .bent
   color: #ffffff;
   font-size: 1.4rem;
   transition: var(--transition);
+}
+
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: auto;
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-brand-logo {
+  height: 48px;
+  width: auto;
+  max-width: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(18, 87, 37, 0.22));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+.nav-brand:hover .nav-brand-logo {
+  transform: scale(1.08) rotate(-3deg);
+  filter: drop-shadow(0 4px 14px rgba(40, 167, 69, 0.45));
+}
+
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.footer-brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
 .nav-brand:hover .brand-symbol {
@@ -4075,7 +4180,7 @@ html, body {
 }
 
 /* ==========================================================================
-   FACEBOOK INTEGRATION STYLES
+   ENHANCED SOCIAL & LUXURY INTEGRATION STYLES
    ========================================================================== */
 .top-facebook-btn {
   background: #1877f2;
@@ -4096,6 +4201,160 @@ html, body {
   transform: translateY(-1px);
 }
 
+/* Luxury Social Cards (Contact Section) */
+.luxury-social-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.luxury-icon-circle {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.55rem;
+  color: #ffffff;
+  transition: transform 0.35s ease;
+}
+
+.luxury-social-card:hover .luxury-icon-circle {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.luxury-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+}
+
+.luxury-card-text strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.luxury-card-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 2px;
+}
+
+.luxury-card-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.88rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.luxury-social-card:hover .luxury-card-arrow {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
+}
+
+/* WhatsApp Card Specifics */
+.wa-luxury-card {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.18) 0%, rgba(18, 140, 126, 0.22) 100%);
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.12);
+}
+
+.wa-luxury-card:hover {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.28) 0%, rgba(18, 140, 126, 0.35) 100%);
+  border-color: rgba(37, 211, 102, 0.8);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.28);
+  transform: translateY(-2px);
+}
+
+.wa-circle {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
+}
+
+.wa-badge {
+  background: rgba(37, 211, 102, 0.25);
+  color: #a7f3d0;
+  border: 1px solid rgba(37, 211, 102, 0.5);
+}
+
+.wa-badge i {
+  color: #25d366;
+  font-size: 0.55rem;
+  animation: pulseLiveDot 1.8s infinite;
+}
+
+@keyframes pulseLiveDot {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Facebook Card Specifics */
+.fb-luxury-card {
+  background: linear-gradient(135deg, rgba(24, 119, 242, 0.18) 0%, rgba(13, 101, 217, 0.22) 100%);
+  border: 1px solid rgba(24, 119, 242, 0.4);
+  box-shadow: 0 8px 24px rgba(24, 119, 242, 0.12);
+}
+
+.fb-luxury-card:hover {
+  background: linear-gradient(135deg, rgba(24, 119, 242, 0.28) 0%, rgba(13, 101, 217, 0.35) 100%);
+  border-color: rgba(24, 119, 242, 0.8);
+  box-shadow: 0 12px 32px rgba(24, 119, 242, 0.28);
+  transform: translateY(-2px);
+}
+
+.fb-circle {
+  background: linear-gradient(135deg, #1877f2, #0d65d9);
+  box-shadow: 0 4px 16px rgba(24, 119, 242, 0.45);
+}
+
+.fb-badge {
+  background: rgba(24, 119, 242, 0.25);
+  color: #bfdbfe;
+  border: 1px solid rgba(24, 119, 242, 0.5);
+}
+
+.fb-badge i {
+  color: #60a5fa;
+  font-size: 0.65rem;
+}
+
+/* Legacy compatibility classes */
 .facebook-direct-card {
   background: rgba(24, 119, 242, 0.15);
   border: 1px solid rgba(24, 119, 242, 0.35);
@@ -4110,96 +4369,195 @@ html, body {
   transition: var(--transition);
 }
 
-.facebook-direct-card:hover {
-  background: rgba(24, 119, 242, 0.28);
-  transform: translateY(-2px);
-  border-color: #1877f2;
-}
-
-.facebook-direct-card i.fa-facebook-f,
-.facebook-direct-card i.fa-facebook {
-  font-size: 1.8rem;
-  color: #1877f2;
-}
-
-.facebook-direct-card strong {
-  display: block;
-  font-size: 0.92rem;
-}
-
-.facebook-direct-card span {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
+/* Footer Social Buttons Enhancement */
 .footer-social-btn {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 1.15rem;
   text-decoration: none;
-  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .footer-social-btn.fb {
-  background: #1877f2;
+  background: linear-gradient(135deg, rgba(24, 119, 242, 0.5), rgba(13, 101, 217, 0.7));
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
 }
 
 .footer-social-btn.fb:hover {
-  background: #0b5ed7;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+  background: linear-gradient(135deg, #1877f2, #0d65d9);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(24, 119, 242, 0.6);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .footer-social-btn.wa {
-  background: #25d366;
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.5), rgba(18, 140, 126, 0.7));
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
 .footer-social-btn.wa:hover {
-  background: #1eb956;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.6);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-.floating-facebook {
+/* ==========================================================================
+   FLOATING SOCIAL DOCK & RADAR PULSE
+   ========================================================================== */
+.floating-social-stack {
   position: fixed;
-  bottom: 102px;
+  bottom: 30px;
   right: 30px;
-  width: 60px;
-  height: 60px;
-  background: #1877f2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 998;
+}
+
+.floating-social-stack .floating-btn {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-size: 1.7rem;
-  box-shadow: 0 8px 24px rgba(24, 119, 242, 0.45);
-  z-index: 998;
+  font-size: 1.65rem;
   text-decoration: none;
-  transition: var(--transition);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.floating-facebook:hover {
-  transform: scale(1.1) rotate(-6deg);
-  background: #0d65d9;
+.floating-social-stack .floating-facebook {
+  background: linear-gradient(135deg, #1877f2, #0d65d9);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(24, 119, 242, 0.45);
+}
+
+.floating-social-stack .floating-facebook:hover {
+  transform: scale(1.12) rotate(-6deg);
+  background: linear-gradient(135deg, #2b84f6, #1570e6);
+  box-shadow: 0 12px 32px rgba(24, 119, 242, 0.65);
+}
+
+.floating-social-stack .floating-whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+}
+
+.floating-social-stack .floating-whatsapp:hover {
+  transform: scale(1.12) rotate(6deg);
+  background: linear-gradient(135deg, #2fe671, #15a191);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.65);
+}
+
+/* Pulsing radar wave */
+.floating-btn-pulse {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.8;
+  animation: radarPulseAnim 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  pointer-events: none;
+}
+
+@keyframes radarPulseAnim {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  60% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Floating Tooltip */
+.floating-btn-tooltip {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  background: rgba(10, 20, 13, 0.92);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.floating-btn-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(10, 20, 13, 0.92);
+}
+
+.floating-social-stack .floating-btn:hover .floating-btn-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 
 @media (max-width: 768px) {
-  .top-facebook-btn {
-    font-size: 0.72rem !important;
-    padding: 3px 10px !important;
+  .brand-logo-wrap {
+    height: 42px;
   }
-  .floating-facebook {
-    width: 52px;
-    height: 52px;
+  .nav-brand-logo {
+    height: 40px;
+    max-width: 48px;
+  }
+  .top-social-pill {
+    padding: 3px 10px !important;
+    font-size: 0.72rem !important;
+  }
+  .top-social-pill span {
+    display: none;
+  }
+  .top-social-pill i {
+    font-size: 0.85rem;
+  }
+  .floating-social-stack {
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    right: 16px;
+    gap: 10px;
+  }
+  .floating-social-stack .floating-btn {
+    width: 50px;
+    height: 50px;
     font-size: 1.45rem;
-    bottom: calc(84px + env(safe-area-inset-bottom));
-    right: 18px;
-    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+  }
+  .floating-btn-tooltip {
+    display: none;
   }
 }

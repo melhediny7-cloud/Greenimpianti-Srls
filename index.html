@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="style.css?v=2.3.0"/>
+  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <link rel="apple-touch-icon" href="images/logo.png"/>
+  <link rel="stylesheet" href="style.css?v=2.4.0"/>
 </head>
 <body>
 
@@ -22,19 +24,29 @@
     <div class="top-bar-info">
       <span class="top-bar-item"><i class="fas fa-globe-europe"></i> In Italia e tutta l’Europa | Sede: San Giuliano Milanese (MI)</span>
       <span class="top-bar-item"><i class="fas fa-clock"></i> Lun - Ven: 08:00 - 18:00 | Sab: 09:00 - 13:00</span>
-      <a href="mailto:greenimpianti225@gmail.com" class="top-bar-item"><i class="fas fa-envelope"></i> greenimpianti225@gmail.com</a>
+      <a href="mailto:info@greenimpiantisrls.com" class="top-bar-item"><i class="fas fa-envelope"></i> info@greenimpiantisrls.com</a>
     </div>
     <div class="top-bar-actions">
       <span class="top-badge">Civile • Industriale • Commerciale</span>
-      <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="top-facebook-btn" title="Pagina Facebook Ufficiale"><i class="fab fa-facebook-f"></i> Facebook</a>
-      <a href="https://wa.me/393298993363" target="_blank" class="top-whatsapp-btn"><i class="fab fa-whatsapp"></i> Chatta su WhatsApp</a>
+      <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="top-social-pill top-fb-pill" title="Pagina Facebook Ufficiale">
+        <span class="pill-glow"></span>
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </a>
+      <a href="https://wa.me/393298993363" target="_blank" class="top-social-pill top-wa-pill" title="Chatta direttamente su WhatsApp H24">
+        <span class="pill-glow"></span>
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp H24</span>
+      </a>
     </div>
   </div>
 
   <!-- STICKY NAVBAR -->
   <header id="navbar">
     <a href="#hero" class="nav-brand">
-      <div class="brand-symbol"><i class="fas fa-bolt"></i></div>
+      <div class="brand-logo-wrap">
+        <img src="images/logo.png" alt="Logo Green Impianti SrlS" class="nav-brand-logo"/>
+      </div>
       <div class="brand-text">
         <strong>Green Impianti</strong>
         <span>SrlS • Settore Elettrico</span>
@@ -69,9 +81,9 @@
     <a href="#progetti">I Nostri Progetti</a>
     <a href="#perche-noi">Perché Sceglierci</a>
     <a href="#contatti" style="color:var(--primary-green);font-weight:700;"><i class="fas fa-paper-plane"></i> Richiedi Preventivo</a>
-    <div style="display:flex;gap:10px;margin-top:14px;padding:0 20px;">
-      <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#1877f2;color:#ffffff;padding:11px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.86rem;"><i class="fab fa-facebook-f"></i> Facebook</a>
-      <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#25d366;color:#ffffff;padding:11px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.86rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <div class="mobile-social-wrap" style="display:flex;gap:10px;margin-top:14px;padding:0 20px;">
+      <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="mobile-social-pill fb" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg, #1877f2, #0d65d9);color:#ffffff;padding:12px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:0.86rem;box-shadow:0 4px 14px rgba(24,119,242,0.35);"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="mobile-social-pill wa" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg, #25d366, #128c7e);color:#ffffff;padding:12px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:0.86rem;box-shadow:0 4px 14px rgba(37,211,102,0.35);"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     </div>
   </div>
 
@@ -1950,7 +1962,7 @@
               <div class="contact-row-icon"><i class="fas fa-envelope-open-text"></i></div>
               <div class="contact-row-content">
                 <strong>Email Ufficiale</strong>
-                <a href="mailto:greenimpianti225@gmail.com">greenimpianti225@gmail.com</a>
+                <a href="mailto:info@greenimpiantisrls.com">info@greenimpiantisrls.com</a>
               </div>
             </div>
 
@@ -1998,33 +2010,44 @@
               </div>
               <div class="recapiti-item">
                 <span class="label">Email:</span>
-                <span class="val"><a href="mailto:greenimpianti225@gmail.com" style="color:var(--accent-mint);text-decoration:none;">greenimpianti225@gmail.com</a></span>
+                <span class="val"><a href="mailto:info@greenimpiantisrls.com" style="color:var(--accent-mint);text-decoration:none;">info@greenimpiantisrls.com</a></span>
               </div>
             </div>
           </div>
 
-          <!-- WhatsApp Direct Card -->
-          <a href="https://wa.me/393298993363" target="_blank" class="whatsapp-direct-card" style="margin-top:20px;">
-            <div style="display:flex;align-items:center;gap:14px;">
-              <i class="fab fa-whatsapp"></i>
-              <div>
-                <strong>Assistenza Diretta WhatsApp</strong>
-                <span>Invia foto del cantiere per preventivi rapidi</span>
+          <!-- WhatsApp Direct Luxury Card -->
+          <a href="https://wa.me/393298993363" target="_blank" class="luxury-social-card wa-luxury-card" style="margin-top:20px;">
+            <div class="luxury-card-left">
+              <div class="luxury-icon-circle wa-circle">
+                <i class="fab fa-whatsapp"></i>
+                <span class="pulse-ring"></span>
+              </div>
+              <div class="luxury-card-text">
+                <div class="luxury-card-badge wa-badge"><i class="fas fa-circle"></i> Online H24 • Risposta Immediata</div>
+                <strong>Assistenza & Chat WhatsApp</strong>
+                <span>Invia foto e planimetrie per una stima tecnica rapida</span>
               </div>
             </div>
-            <i class="fas fa-chevron-right" style="font-size:0.9rem;color:rgba(255,255,255,0.7);"></i>
+            <div class="luxury-card-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
           </a>
 
-          <!-- Facebook Official Page Card -->
-          <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="facebook-direct-card" style="margin-top:12px;">
-            <div style="display:flex;align-items:center;gap:14px;">
-              <i class="fab fa-facebook-f"></i>
-              <div>
+          <!-- Facebook Official Page Luxury Card -->
+          <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="luxury-social-card fb-luxury-card" style="margin-top:14px;">
+            <div class="luxury-card-left">
+              <div class="luxury-icon-circle fb-circle">
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <div class="luxury-card-text">
+                <div class="luxury-card-badge fb-badge"><i class="fas fa-certificate"></i> Pagina Ufficiale • Cantieri & Aggiornamenti</div>
                 <strong>Seguici su Facebook</strong>
-                <span>Foto cantieri, aggiornamenti e progetti recenti</span>
+                <span>Iscriviti alla pagina per vedere i nuovi progetti e video</span>
               </div>
             </div>
-            <i class="fas fa-arrow-up-right-from-square" style="font-size:0.85rem;color:rgba(255,255,255,0.7);"></i>
+            <div class="luxury-card-arrow">
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </div>
           </a>
         </div>
 
@@ -2035,12 +2058,12 @@
 
           <div class="form-delivery-badge">
             <i class="fas fa-envelope-circle-check"></i>
-            <span>Tutte le richieste vengono inoltrate direttamente a: <strong>greenimpianti225@gmail.com</strong></span>
+            <span>Tutte le richieste vengono inoltrate direttamente a: <strong>info@greenimpiantisrls.com</strong></span>
           </div>
 
           <div id="form-status-alert" class="form-status-alert" style="display:none;" role="alert"></div>
 
-          <form id="contact-form" action="https://formsubmit.co/greenimpianti225@gmail.com" method="POST">
+          <form id="contact-form" action="https://formsubmit.co/info@greenimpiantisrls.com" method="POST">
             <!-- FormSubmit & Email Configuration -->
             <input type="hidden" name="_captcha" value="false"/>
             <input type="hidden" name="_template" value="table"/>
@@ -2121,8 +2144,10 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-          <div class="brand-symbol" style="width:40px;height:40px;font-size:1.1rem;"><i class="fas fa-bolt"></i></div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+          <div class="footer-logo-wrap">
+            <img src="images/logo.png" alt="Logo Green Impianti SrlS" class="footer-brand-logo"/>
+          </div>
           <strong>Green Impianti SrlS</strong>
         </div>
         <p>
@@ -2133,7 +2158,7 @@
         </p>
         <div class="footer-social-links" style="display:flex;gap:12px;margin-top:16px;">
           <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="footer-social-btn fb" title="Seguici su Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="footer-social-btn wa" title="Chatta su WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="footer-social-btn wa" title="Chatta su WhatsApp H24"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
 
@@ -2170,7 +2195,7 @@
         <ul>
           <li><a href="tel:+393298993363"><i class="fas fa-phone" style="margin-right:8px;color:var(--accent-mint);"></i> +39 329 899 3363</a></li>
           <li><a href="tel:+393802633225"><i class="fas fa-phone" style="margin-right:8px;color:var(--accent-mint);"></i> +39 380 263 3225</a></li>
-          <li><a href="mailto:greenimpianti225@gmail.com"><i class="fas fa-envelope" style="margin-right:8px;color:var(--accent-mint);"></i> greenimpianti225@gmail.com</a></li>
+          <li><a href="mailto:info@greenimpiantisrls.com"><i class="fas fa-envelope" style="margin-right:8px;color:var(--accent-mint);"></i> info@greenimpiantisrls.com</a></li>
           <li><a href="https://wa.me/393298993363" target="_blank"><i class="fab fa-whatsapp" style="margin-right:8px;color:#25d366;"></i> WhatsApp H24</a></li>
           <li><a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" style="margin-right:8px;color:#1877f2;"></i> Pagina Facebook Ufficiale</a></li>
         </ul>
@@ -2204,13 +2229,19 @@
     </div>
   </div>
 
-  <!-- FLOATING BUTTONS -->
-  <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="floating-facebook" title="Seguici su Facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://wa.me/393298993363" target="_blank" class="floating-whatsapp" title="Parla con noi su WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+  <!-- FLOATING ACTION BUTTONS -->
+  <div class="floating-social-stack">
+    <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="floating-btn floating-facebook" aria-label="Seguici su Facebook" title="Seguici su Facebook">
+      <span class="floating-btn-pulse"></span>
+      <i class="fab fa-facebook-f"></i>
+      <span class="floating-btn-tooltip">Seguici su Facebook</span>
+    </a>
+    <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="floating-btn floating-whatsapp" aria-label="Chatta con noi su WhatsApp" title="Chatta su WhatsApp">
+      <span class="floating-btn-pulse"></span>
+      <i class="fab fa-whatsapp"></i>
+      <span class="floating-btn-tooltip">Chatta su WhatsApp</span>
+    </a>
+  </div>
   <button id="scroll-top" aria-label="Torna in cima" title="Torna su">
     <i class="fas fa-chevron-up"></i>
   </button>
@@ -2290,6 +2321,6 @@
     </div>
   </div>
 
-  <script src="main.js?v=2.3.0"></script>
+  <script src="main.js?v=2.4.0"></script>
 </body>
 </html>

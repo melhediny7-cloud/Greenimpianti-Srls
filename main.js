@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') updateLightbox(activeIndex + 1);
   });
 
-  // --- 6. Contact Form Processing (Direct Delivery to greenimpianti225@gmail.com) ---
+  // --- 6. Contact Form Processing (Direct Delivery to info@greenimpiantisrls.com) ---
   const contactForm = document.getElementById('contact-form');
   const toast = document.getElementById('toast');
   const formStatus = document.getElementById('form-status-alert');
@@ -232,16 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // Set loading state
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Inoltro a greenimpianti225@gmail.com...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Inoltro a info@greenimpiantisrls.com...';
       }
 
       if (formStatus) {
         formStatus.style.display = 'flex';
         formStatus.className = 'form-status-alert loading';
-        formStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Invio della richiesta all\'indirizzo <strong>greenimpianti225@gmail.com</strong> in corso...</span>';
+        formStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Invio della richiesta all\'indirizzo <strong>info@greenimpiantisrls.com</strong> in corso...</span>';
       }
 
-      const mailtoLink = 'mailto:greenimpianti225@gmail.com?subject=' +
+      const mailtoLink = 'mailto:info@greenimpiantisrls.com?subject=' +
         encodeURIComponent('Richiesta Preventivo [' + servizio + '] - ' + nome + ' ' + cognome) +
         '&body=' + encodeURIComponent(
           'Nuova richiesta preventivo da sito web Green Impianti SrlS:\n\n' +
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Telefono: ' + telefono + '\n' +
           'Tipologia Intervento: ' + servizio + '\n\n' +
           'Dettagli del Progetto:\n' + messaggio + '\n\n' +
-          'Destinazione: greenimpianti225@gmail.com'
+          'Destinazione: info@greenimpiantisrls.com'
         );
 
       try {
@@ -258,8 +258,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.set('_subject', 'Nuova Richiesta Preventivo [' + servizio + '] - ' + nome + ' ' + cognome);
         formData.set('_replyto', email);
 
-        // Send via AJAX to FormSubmit endpoint configured for greenimpianti225@gmail.com
-        const response = await fetch('https://formsubmit.co/ajax/greenimpianti225@gmail.com', {
+        // Send via AJAX to FormSubmit endpoint configured for info@greenimpiantisrls.com
+        const response = await fetch('https://formsubmit.co/ajax/info@greenimpiantisrls.com', {
           method: 'POST',
           headers: {
             'Accept': 'application/json'
@@ -271,11 +271,11 @@ document.addEventListener('DOMContentLoaded', () => {
           if (formStatus) {
             formStatus.style.display = 'flex';
             formStatus.className = 'form-status-alert success';
-            formStatus.innerHTML = '<i class="fas fa-circle-check" style="color:#10b981;font-size:1.3rem;"></i><span><strong>Richiesta inoltrata con successo!</strong> L\'email è stata recapitata all\'ufficio tecnico (<em>greenimpianti225@gmail.com</em>). Ti risponderemo con un\'analisi preliminare entro 24 ore.</span>';
+            formStatus.innerHTML = '<i class="fas fa-circle-check" style="color:#10b981;font-size:1.3rem;"></i><span><strong>Richiesta inoltrata con successo!</strong> L\'email è stata recapitata all\'ufficio tecnico (<em>info@greenimpiantisrls.com</em>). Ti risponderemo con un\'analisi preliminare entro 24 ore.</span>';
           }
           if (toast) {
             const toastSpan = toast.querySelector('span');
-            if (toastSpan) toastSpan.textContent = 'Richiesta inoltrata con successo a greenimpianti225@gmail.com!';
+            if (toastSpan) toastSpan.textContent = 'Richiesta inoltrata con successo a info@greenimpiantisrls.com!';
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 6000);
           }
@@ -284,12 +284,12 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error('Server returned ' + response.status);
         }
       } catch (err) {
-        // Fallback for adblocker/offline/CORS restrictions: Open direct email client prefilled to greenimpianti225@gmail.com
+        // Fallback for adblocker/offline/CORS restrictions: Open direct email client prefilled to info@greenimpiantisrls.com
         console.warn('Fallback email delivery:', err);
         if (formStatus) {
           formStatus.style.display = 'flex';
           formStatus.className = 'form-status-alert fallback';
-          formStatus.innerHTML = '<i class="fas fa-envelope-circle-check"></i><span>Apertura client di posta per l\'invio a <strong>greenimpianti225@gmail.com</strong>... Se il messaggio non si apre, puoi scrivere direttamente a <a href="' + mailtoLink + '" style="color:#007a33;text-decoration:underline;font-weight:700;">greenimpianti225@gmail.com</a>.</span>';
+          formStatus.innerHTML = '<i class="fas fa-envelope-circle-check"></i><span>Apertura client di posta per l\'invio a <strong>info@greenimpiantisrls.com</strong>... Se il messaggio non si apre, puoi scrivere direttamente a <a href="' + mailtoLink + '" style="color:#007a33;text-decoration:underline;font-weight:700;">info@greenimpiantisrls.com</a>.</span>';
         }
         window.location.href = mailtoLink;
       } finally {
