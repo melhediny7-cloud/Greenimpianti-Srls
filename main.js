@@ -147,6 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bentoItems.forEach((item) => {
     item.addEventListener('click', () => {
+      const certType = item.getAttribute('data-cert');
+      if (certType && window.openCertModal) {
+        window.openCertModal(certType);
+        return;
+      }
       const currentItems = getVisibleItems();
       const index = currentItems.indexOf(item);
       updateLightbox(index >= 0 ? index : 0);
@@ -844,9 +849,212 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- 11. Official Fluke Networks CCTT Certificates & Anti-Copy Security Guard ---
+  function initCertificatesAndSecurity() {
+    const certModal = document.getElementById('certModal');
+    const certModalImg = document.getElementById('certModalImg');
+    const certModalTitle = document.getElementById('certModalTitle');
+    const certModalSub = document.getElementById('certModalSub');
+    const certModalControlId = document.getElementById('certModalControlId');
+    const certModalBicsi = document.getElementById('certModalBicsi');
+    const certModalExpiry = document.getElementById('certModalExpiry');
+    const certModalClose = document.getElementById('certModalClose');
+    const securityToast = document.getElementById('securityToast');
+
+    let toastTimeout = null;
+    const showSecurityToast = (customMsg) => {
+      if (!securityToast) return;
+      if (customMsg) {
+        const span = securityToast.querySelector('.security-toast-content span');
+        if (span) span.textContent = customMsg;
+      }
+      securityToast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        securityToast.classList.remove('show');
+      }, 3500);
+    };
+
+    const certData = {
+      fibra: {
+        src: 'images/certificato_fluke_fibra.png',
+        title: 'Fiber Certified Cabling Test Technician',
+        sub: 'Certificazione Sistemi in Fibra Ottica (Tier 1 & OTDR Tier 2) • Fluke Networks CCTT',
+        controlId: '# 06260922IT',
+        bicsi: '7 Crediti Formativi CEC (OV-FLUKE-WA-0514-1)',
+        expiry: 'Valido dal 22/09/2026 fino al 22/09/2029'
+      },
+      rame: {
+        src: 'images/certificato_fluke_rame.png',
+        title: 'Copper Certified Cabling Test Technician',
+        sub: 'Certificazione Sistemi in Rame con DSX Series CableAnalyzer™ • Fluke Networks CCTT',
+        controlId: '# 06260922IT',
+        bicsi: '7 Crediti Formativi CEC (OV-FLUKE-WA-0514-1)',
+        expiry: 'Valido dal 21/09/2026 fino al 21/09/2029'
+      }
+    };
+
+    const openCertModal = (type) => {
+      const data = certData[type] || certData.fibra;
+      if (certModalImg) {
+        certModalImg.src = data.src;
+        certModalImg.alt = data.title + ' - Mahmoud Mansour Green Impianti SrlS';
+      }
+      if (certModalTitle) certModalTitle.textContent = data.title;
+      if (certModalSub) certModalSub.textContent = data.sub;
+      if (certModalControlId) certModalControlId.textContent = data.controlId;
+      if (certModalBicsi) certModalBicsi.textContent = data.bicsi;
+      if (certModalExpiry) certModalExpiry.textContent = data.expiry;
+
+      if (certModal) {
+        certModal.classList.add('active');
+        certModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    const closeCertModal = () => {
+      if (certModal) {
+        certModal.classList.remove('active');
+        certModal.setAttribute('aria-hidden', 'true');
+        if (certModalImg) certModalImg.src = '';
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Expose globally for Bento click
+    window.openCertModal = openCertModal;
+
+    // Trigger buttons
+    document.querySelectorAll('.cert-btn-inspect').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openCertModal(btn.getAttribute('data-target'));
+      });
+    });
+
+    // Shield click triggers
+    document.querySelectorAll('.protected-cert-container').forEach(container => {
+      container.addEventListener('click', () => {
+        openCertModal(container.getAttribute('data-cert-type'));
+      });
+      // Accessibility enter key
+      container.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openCertModal(container.getAttribute('data-cert-type'));
+        }
+      });
+    });
+
+    // Close modal handlers
+    if (certModalClose) certModalClose.addEventListener('click', closeCertModal);
+    if (certModal) {
+      certModal.addEventListener('click', (e) => {
+        if (e.target === certModal) closeCertModal();
+      });
+    }
+
+    // Network Rack Cards: Click opens in lightbox
+    document.querySelectorAll('.rack-card-item').forEach(card => {
+      card.addEventListener('click', () => {
+        const src = card.getAttribute('data-src');
+        const title = card.getAttribute('data-title');
+        const desc = card.getAttribute('data-desc');
+
+        // Look for matching item in bento grid to sync index
+        const allItems = Array.from(document.querySelectorAll('.bento-item'));
+        const matchIdx = allItems.findIndex(it => (it.getAttribute('data-src') || '').includes(src));
+        
+        if (matchIdx >= 0 && typeof updateLightbox === 'function') {
+          updateLightbox(matchIdx);
+          if (lightbox) {
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+          }
+        } else if (lightbox && lightboxImg) {
+          lightboxImg.src = src;
+          if (lightboxCaption) lightboxCaption.textContent = title;
+          if (lightboxDesc) lightboxDesc.textContent = desc;
+          lightbox.classList.add('active');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    // Jump to Reti Gallery Button
+    const btnJumpReti = document.getElementById('btn-jump-reti-gallery');
+    if (btnJumpReti) {
+      btnJumpReti.addEventListener('click', () => {
+        const retiPill = document.querySelector('.filter-pill[data-filter="reti"]');
+        if (retiPill) retiPill.click();
+        const progettiSec = document.getElementById('progetti');
+        if (progettiSec) {
+          progettiSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // =========================================================================
+    // ANTI-COPY, ANTI-DOWNLOAD & CONTENT INTEGRITY PROTECTION
+    // =========================================================================
+
+    const isProtectedTarget = (el) => {
+      if (!el) return false;
+      return !!(
+        el.closest('.protected-cert-container') ||
+        el.closest('#certModal') ||
+        el.closest('.cert-bento-card') ||
+        (el.tagName === 'IMG' && el.src && el.src.includes('certificato_fluke'))
+      );
+    };
+
+    // 1. Context Menu (Right Click) Block
+    document.addEventListener('contextmenu', (e) => {
+      if (isProtectedTarget(e.target)) {
+        e.preventDefault();
+        e.stopPropagation();
+        showSecurityToast('🔒 Documento Ufficiale Protetto: Download e copia disabilitati a norma di legge.');
+        return false;
+      }
+    });
+
+    // 2. Drag & Drop Block
+    document.addEventListener('dragstart', (e) => {
+      if (isProtectedTarget(e.target)) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // 3. Keyboard Shortcuts Protection (Ctrl+S, Ctrl+P, Ctrl+U)
+    document.addEventListener('keydown', (e) => {
+      const isCertOpen = certModal && certModal.classList.contains('active');
+
+      if (e.key === 'Escape' && isCertOpen) {
+        closeCertModal();
+        return;
+      }
+
+      if (isCertOpen || isProtectedTarget(e.target) || (e.target.closest && e.target.closest('.certificazioni-section'))) {
+        const isCtrl = e.ctrlKey || e.metaKey;
+        if (isCtrl && ['s', 'S', 'p', 'P', 'u', 'U'].includes(e.key)) {
+          e.preventDefault();
+          e.stopPropagation();
+          showSecurityToast('🔒 Documento Protetto: Stampa, salvataggio e download sono disabilitati.');
+          return false;
+        }
+      }
+    });
+  }
+
   // Initialize atmospheric background and interactive electric effects
   initLightningBackground();
   initElectricTouchAndClickSparks();
   initHeroBackgroundVideo();
+  initCertificatesAndSecurity();
 
 });

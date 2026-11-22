@@ -1,6 +1,12 @@
 name = "greenimpianti-srls"
 main = "worker.js"
 compatibility_date = "2024-09-01"
+workers_dev = true
+
+routes = [
+  { pattern = "greenimpiantisrls.com", custom_domain = true },
+  { pattern = "www.greenimpiantisrls.com", custom_domain = true }
+]
 
 [assets]
 directory = "."

@@ -2976,3 +2976,1100 @@ html, body {
     gap: 32px;
   }
 }
+
+/* ==========================================================================
+   SERVICE 06 FLUKE RIBBON
+   ========================================================================== */
+.service-cert-ribbon {
+  margin-top: 18px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(27, 122, 52, 0.08));
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--primary-dark);
+}
+
+.service-cert-ribbon strong {
+  color: var(--primary-deep);
+}
+
+.service-cert-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  text-decoration: underline;
+  transition: var(--transition);
+}
+
+.service-cert-link:hover {
+  color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   SECTION: CERTIFICAZIONI FLUKE & QUADRI DI RETE
+   ========================================================================== */
+.certificazioni-section {
+  background: linear-gradient(180deg, #f8faf8 0%, #edf7ee 35%, #f4f9f5 70%, #f8faf8 100%);
+  border-top: 1px solid rgba(27, 122, 52, 0.12);
+  border-bottom: 1px solid rgba(27, 122, 52, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.certificazioni-section::before {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.06), transparent 70%);
+  pointer-events: none;
+}
+
+.certificazioni-section::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+/* Fluke Trust Metric Cards */
+.fluke-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-bottom: 50px;
+}
+
+.fluke-trust-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.fluke-trust-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.fluke-trust-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent-gold), var(--primary-green));
+}
+
+.fluke-trust-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(27, 122, 52, 0.15));
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.fluke-trust-card:hover .fluke-trust-icon {
+  background: var(--accent-gold);
+  color: #071f0d;
+  transform: scale(1.08);
+}
+
+.fluke-trust-content h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.fluke-trust-content p {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.fluke-trust-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  background: rgba(27, 122, 52, 0.08);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(27, 122, 52, 0.2);
+}
+
+/* Dual Showcase Layout: Certificates vs Network Racks */
+.cert-dual-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 45px;
+}
+
+.column-header {
+  margin-bottom: 24px;
+}
+
+.column-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.column-badge.gold-badge {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.25));
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.column-badge.green-badge {
+  background: linear-gradient(135deg, rgba(27, 122, 52, 0.12), rgba(74, 222, 128, 0.22));
+  color: var(--primary);
+  border: 1px solid rgba(27, 122, 52, 0.3);
+}
+
+.column-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+}
+
+.column-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* The Official Certificate Cards */
+.certs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.cert-card-wrap {
+  perspective: 1000px;
+}
+
+.cert-card-item {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 14px 34px -10px rgba(18, 87, 37, 0.12), 0 0 20px rgba(245, 158, 11, 0.05);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.cert-card-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-gold);
+  box-shadow: 0 20px 42px -12px rgba(18, 87, 37, 0.2), 0 0 28px rgba(245, 158, 11, 0.18);
+}
+
+.cert-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #071f0d;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.cert-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #4ade80;
+  text-transform: uppercase;
+}
+
+.cert-status-pill.copper-pill {
+  color: #fbbf24;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse-live 2s infinite ease-in-out;
+}
+
+.live-dot.copper-dot {
+  background: #fbbf24;
+  box-shadow: 0 0 8px #fbbf24;
+}
+
+@keyframes pulse-live {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.cert-fluke-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+.cert-fluke-logo span {
+  color: #fbbf24;
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* ANTI-THEFT PROTECTED CERTIFICATE CONTAINER */
+.protected-cert-container {
+  position: relative;
+  background: #0d1e11;
+  overflow: hidden;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Security Watermark Mesh */
+.cert-watermark-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='120' viewBox='0 0 260 120'%3E%3Ctext x='15' y='65' transform='rotate(-22 15 65)' fill='%231b7a34' font-family='sans-serif' font-weight='800' font-size='10' letter-spacing='2'%3EGREEN IMPIANTI • CCTT CERTIFIED%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+/* Transparent Protective Click/Touch Shield */
+.cert-security-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.001);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.protected-cert-container:hover .cert-security-shield {
+  background: rgba(7, 31, 13, 0.28);
+}
+
+.shield-zoom-indicator {
+  background: rgba(7, 31, 13, 0.92);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid var(--accent-gold);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.shield-zoom-indicator i {
+  color: var(--accent-gold);
+}
+
+.protected-cert-container:hover .shield-zoom-indicator {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Holographic Light Beam Sheen */
+.cert-hologram-sheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.35) 50%, rgba(245, 158, 11, 0.25) 55%, transparent 75%);
+  transform: translateX(-160%) skewX(-25deg);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-card-item:hover .cert-hologram-sheen {
+  transform: translateX(160%) skewX(-25deg);
+}
+
+/* Official Embossed Gold Seal */
+.cert-gold-seal {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 8;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbbf24 0%, #d97706 70%, #92400e 100%);
+  color: #071f0d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.55rem;
+  text-align: center;
+  line-height: 1.1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.cert-gold-seal i {
+  font-size: 0.85rem;
+  color: #071f0d;
+  margin-bottom: 2px;
+}
+
+.cert-gold-seal.copper-seal {
+  background: radial-gradient(circle, #f97316 0%, #c2410c 70%, #7c2d12 100%);
+  color: #ffffff;
+}
+
+.cert-gold-seal.copper-seal i {
+  color: #ffffff;
+}
+
+/* Protected Image Element */
+.protected-cert-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+.cert-card-body {
+  padding: 22px;
+}
+
+.cert-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.cert-meta-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.cert-data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  background: rgba(7, 31, 13, 0.03);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cert-data-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-data-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cert-data-label i {
+  color: var(--primary-green);
+  font-size: 0.72rem;
+}
+
+.cert-data-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-top: 2px;
+}
+
+.cert-data-val.code-val {
+  font-family: monospace;
+  color: var(--primary-green);
+  font-size: 0.86rem;
+}
+
+.cert-data-val.validity-val {
+  color: #059669;
+}
+
+.cert-btn-inspect {
+  width: 100%;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+  color: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(18, 87, 37, 0.2);
+}
+
+.cert-btn-inspect:hover {
+  background: linear-gradient(135deg, var(--primary-green), var(--primary));
+  box-shadow: 0 6px 18px rgba(18, 87, 37, 0.35);
+  transform: translateY(-2px);
+  border-color: var(--accent-gold);
+}
+
+/* Quadri di Rete / Armadi Server Showcase ("كودرات النت") */
+.racks-grid-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.rack-card-item {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.rack-card-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-green);
+}
+
+.rack-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #071f0d;
+}
+
+.rack-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rack-card-item:hover .rack-img-wrap img {
+  transform: scale(1.08);
+}
+
+.rack-float-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(7, 31, 13, 0.85);
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rack-float-tag i {
+  color: var(--accent-gold);
+}
+
+.rack-overlay-glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 31, 13, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.rack-card-item:hover .rack-overlay-glass {
+  opacity: 1;
+}
+
+.rack-view-pill {
+  background: #ffffff;
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 30px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.rack-view-pill i {
+  color: var(--accent-gold);
+}
+
+.rack-card-item:hover .rack-view-pill {
+  transform: translateY(0);
+}
+
+.rack-card-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.rack-card-badges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tech-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  background: rgba(27, 122, 52, 0.08);
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.fluke-pass-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rack-card-info h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.rack-card-info p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.racks-cta-wrap {
+  text-align: center;
+}
+
+.racks-filter-jump-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-deep);
+  border: 1.5px dashed var(--primary-green);
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.racks-filter-jump-btn:hover {
+  background: var(--primary-dark);
+  color: #ffffff;
+  border-color: var(--accent-gold);
+  border-style: solid;
+  transform: translateY(-2px);
+}
+
+/* Legal Copyright & Anti-Theft Notice */
+.cert-copyright-notice {
+  background: linear-gradient(135deg, rgba(7, 31, 13, 0.96), rgba(18, 87, 37, 0.96));
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: var(--radius-md);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 8px 24px rgba(7, 31, 13, 0.2);
+}
+
+.notice-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.notice-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
+}
+
+.notice-text strong {
+  color: var(--accent-gold);
+}
+
+.notice-text em {
+  color: #ffffff;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Bento Grid Certificate Cards */
+.cert-bento-card {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(245, 158, 11, 0.45);
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+.cert-bento-card .bento-tag.gold-tag {
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: #071f0d;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+}
+
+.bento-cert-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: transparent;
+  cursor: pointer;
+  -webkit-touch-callout: none !important;
+  user-select: none !important;
+}
+
+.bento-cert-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='100' viewBox='0 0 220 100'%3E%3Ctext x='10' y='50' transform='rotate(-20 10 50)' fill='%231b7a34' font-family='sans-serif' font-weight='800' font-size='9'%3EGREEN IMPIANTI • CCTT%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+/* DEDICATED PROTECTED CERTIFICATE INSPECTION MODAL (#certModal) */
+.cert-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 31, 13, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s ease;
+}
+
+.cert-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cert-modal-window {
+  background: #0f172a;
+  border: 1.5px solid rgba(245, 158, 11, 0.6);
+  border-radius: var(--radius-lg);
+  max-width: 960px;
+  width: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(245, 158, 11, 0.2);
+  transform: scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cert-modal-backdrop.active .cert-modal-window {
+  transform: scale(1);
+}
+
+.cert-modal-header {
+  padding: 18px 24px;
+  background: #071f0d;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cert-modal-fluke-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cert-modal-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.cert-modal-sub {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.cert-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cert-modal-verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid #10b981;
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.cert-modal-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: none;
+  font-size: 1.8rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.cert-modal-close-btn:hover {
+  background: #ef4444;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.cert-modal-viewer {
+  position: relative;
+  background: #090e17;
+  overflow: auto;
+  max-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+.cert-modal-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: transparent;
+  cursor: default;
+  -webkit-touch-callout: none !important;
+}
+
+.cert-modal-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='120' viewBox='0 0 280 120'%3E%3Ctext x='20' y='60' transform='rotate(-22 20 60)' fill='%23ffffff' font-family='sans-serif' font-weight='800' font-size='10' letter-spacing='2'%3EGREEN IMPIANTI • CCTT CERTIFIED%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+.cert-modal-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+.cert-modal-footer {
+  padding: 16px 24px;
+  background: #071f0d;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cert-cred-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cred-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cred-val {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 2px;
+}
+
+.cred-val.highlight-val {
+  color: var(--accent-gold);
+  font-family: monospace;
+  font-size: 0.88rem;
+}
+
+.cred-val.green-val {
+  color: #34d399;
+}
+
+.cert-modal-protection-bar {
+  padding: 8px 24px;
+  background: #041007;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cert-modal-protection-bar i {
+  color: var(--accent-gold);
+}
+
+/* FLOATING SECURITY TOAST */
+.security-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(7, 31, 13, 0.95);
+  border: 1px solid var(--accent-gold);
+  color: #ffffff;
+  padding: 14px 22px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.25);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 90%;
+  pointer-events: none;
+}
+
+.security-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.security-toast-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.security-toast-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.security-toast-content strong {
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+}
+
+.security-toast-content span {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Responsive adjustments for Certificazioni */
+@media (max-width: 992px) {
+  .cert-dual-showcase {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fluke-trust-grid {
+    grid-template-columns: 1fr;
+  }
+  .racks-grid-showcase {
+    grid-template-columns: 1fr;
+  }
+  .cert-data-grid {
+    grid-template-columns: 1fr;
+  }
+  .cert-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cert-modal-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
