@@ -15,7 +15,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="icon" type="image/png" href="images/logo.png"/>
   <link rel="apple-touch-icon" href="images/logo.png"/>
-  <link rel="stylesheet" href="style.css?v=2.4.0"/>
+  <link rel="stylesheet" href="style.css?v=2.5.0"/>
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('green-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 </head>
 <body>
 
@@ -65,25 +71,65 @@
         <li><a href="#contatti" class="nav-cta-btn"><i class="fas fa-paper-plane"></i> Preventivo</a></li>
       </ul>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Apri menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions-group">
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambia tema chiaro o scuro" title="Tema Scuro / Chiaro">
+        <i class="fas fa-moon moon-icon"></i>
+        <i class="fas fa-sun sun-icon"></i>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#hero">Home</a>
-    <a href="#chi-siamo">Profilo & Vision Aziendale</a>
-    <a href="#cosa-facciamo">Settori d'Intervento</a>
-    <a href="#competenze">Schema Competenze</a>
-    <a href="#collaborazioni">Collaborazioni & Partnership</a>
-    <a href="#certificazioni">Certificazioni Fluke & Reti</a>
-    <a href="#progetti">I Nostri Progetti</a>
-    <a href="#perche-noi">Perché Sceglierci</a>
-    <a href="#contatti" style="color:var(--primary-green);font-weight:700;"><i class="fas fa-paper-plane"></i> Richiedi Preventivo</a>
-    <div class="mobile-social-wrap" style="display:flex;gap:10px;margin-top:14px;padding:0 20px;">
-      <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="mobile-social-pill fb" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg, #1877f2, #0d65d9);color:#ffffff;padding:12px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:0.86rem;box-shadow:0 4px 14px rgba(24,119,242,0.35);"><i class="fab fa-facebook-f"></i> Facebook</a>
-      <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="mobile-social-pill wa" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg, #25d366, #128c7e);color:#ffffff;padding:12px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:0.86rem;box-shadow:0 4px 14px rgba(37,211,102,0.35);"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  <!-- MODERN FULLSCREEN MOBILE MENU OVERLAY -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-backdrop"></div>
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <div class="mobile-menu-brand">
+          <img src="images/logo.png" alt="Logo Green Impianti" class="mobile-brand-logo"/>
+          <div>
+            <strong>Green Impianti</strong>
+            <span>SrlS • Settore Elettrico</span>
+          </div>
+        </div>
+        <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Chiudi menu">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="mobile-theme-bar">
+        <span>Modalità Visiva</span>
+        <button class="mobile-theme-toggle" id="mobile-theme-toggle" aria-label="Cambia tema chiaro/scuro">
+          <i class="fas fa-moon moon-icon"></i>
+          <i class="fas fa-sun sun-icon"></i>
+          <span class="mobile-theme-label">Tema Scuro</span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu-nav">
+        <span class="mobile-nav-caption">Navigazione</span>
+        <a href="#hero"><i class="fas fa-house"></i> Home</a>
+        <a href="#chi-siamo"><i class="fas fa-building"></i> Profilo & Vision</a>
+        <a href="#cosa-facciamo"><i class="fas fa-bolt"></i> Servizi & Impianti</a>
+        <a href="#competenze"><i class="fas fa-list-check"></i> Competenze Tecniche</a>
+        <a href="#collaborazioni"><i class="fas fa-handshake"></i> Partnership & Clienti</a>
+        <a href="#certificazioni"><i class="fas fa-certificate"></i> Certificazioni Fluke</a>
+        <a href="#progetti"><i class="fas fa-images"></i> Progetti Realizzati</a>
+        <a href="#perche-noi"><i class="fas fa-shield-halved"></i> Perché Sceglierci</a>
+        <a href="#contatti" class="mobile-cta-link"><i class="fas fa-paper-plane"></i> Richiedi Preventivo</a>
+      </nav>
+
+      <div class="mobile-menu-footer">
+        <div class="mobile-social-pills">
+          <a href="https://www.facebook.com/share/1J39g1Nami/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="mobile-social-pill fb"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="mobile-social-pill wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <div class="mobile-tel-banner">
+          <a href="tel:+393298993363"><i class="fas fa-phone-volume"></i> Pronto Intervento: +39 329 899 3363</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -104,8 +150,9 @@
 
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
-    <!-- Ambient Electricity & Background Lightning Canvas -->
+    <!-- Ambient Electricity & Interactive Energy Network Canvas -->
     <canvas id="lightning-canvas" class="lightning-canvas" aria-hidden="true"></canvas>
+
     <div class="hero-container">
       <div class="hero-content">
         <a href="#dossier-intro" class="hero-dossier-pill">
@@ -130,21 +177,195 @@
         </div>
         <div class="hero-stats-grid">
           <div class="hero-stat-card">
-            <strong>100%</strong>
+            <strong class="stat-number" data-target="100" data-suffix="%">100%</strong>
             <span>A Norma di Legge</span>
           </div>
           <div class="hero-stat-card">
-            <strong>69+</strong>
+            <strong class="stat-number" data-target="69" data-suffix="+">69+</strong>
             <span>Progetti Documentati</span>
           </div>
           <div class="hero-stat-card">
-            <strong>24h</strong>
-            <span>Reperibilità e Assistenza</span>
+            <strong class="stat-number" data-target="24" data-suffix="h">24h</strong>
+            <span>Reperibilità H24</span>
           </div>
         </div>
       </div>
 
-     
+      <!-- Live High-Tech Energy & Status Terminal Card -->
+      <div class="hero-tech-card">
+        <div class="tech-card-header">
+          <div class="tech-card-status">
+            <span class="status-pulse-dot"></span>
+            <span>Operatività H24 Attiva • Pronto Intervento</span>
+          </div>
+          <div class="tech-card-badge"><i class="fas fa-bolt"></i> CEI 64-8</div>
+        </div>
+
+        <div class="tech-card-body">
+          <div class="tech-card-lead">
+            <div class="tech-card-lead-icon"><i class="fas fa-microchip"></i></div>
+            <div>
+              <h4>Tecnologia & Quadristica</h4>
+              <p>Cablaggi Schneider & ABB con collaudo strumentale Fluke CCTT certificato.</p>
+            </div>
+          </div>
+
+          <div class="tech-specs-list">
+            <div class="tech-spec-row">
+              <span class="spec-label"><i class="fas fa-check-double"></i> Certificazione:</span>
+              <span class="spec-val">D.M. 37/08 • Di.Co. Ufficiale</span>
+            </div>
+            <div class="tech-spec-row">
+              <span class="spec-label"><i class="fas fa-network-wired"></i> Reti & Dati:</span>
+              <span class="spec-val">Rame Cat. 6A/7/8 & Fibra Ottica</span>
+            </div>
+            <div class="tech-spec-row">
+              <span class="spec-label"><i class="fas fa-solar-panel"></i> Energie Rinnovabili:</span>
+              <span class="spec-val">Huawei Solar • Efficienza Green</span>
+            </div>
+            <div class="tech-spec-row">
+              <span class="spec-label"><i class="fas fa-helmet-safety"></i> Sicurezza Cantieri:</span>
+              <span class="spec-val">Lavori in Quota PLE • PES/PAV</span>
+            </div>
+          </div>
+
+          <div class="tech-card-footer">
+            <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="tech-card-cta">
+              <i class="fab fa-whatsapp"></i> Chatta con Ufficio Tecnico H24
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       BRAND & TECHNOLOGY PARTNERS MARQUEE (INFINITE TICKER)
+       ========================================================================= -->
+  <section class="brand-marquee-section" aria-label="Brand e Partner Tecnologici Ufficiali">
+    <div class="marquee-intro">
+      <span class="marquee-badge"><i class="fas fa-microchip"></i> Partner Tecnologici & Componentistica Certificata di Primo Livello</span>
+    </div>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-item">
+          <div class="marquee-icon schneider"><i class="fas fa-bolt"></i></div>
+          <div class="marquee-text">
+            <strong>Schneider Electric</strong>
+            <span>Quadristica & Interruttori BT/MT</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon abb"><i class="fas fa-network-wired"></i></div>
+          <div class="marquee-text">
+            <strong>ABB</strong>
+            <span>Automazione Industriale & Potenza</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon huawei"><i class="fas fa-solar-panel"></i></div>
+          <div class="marquee-text">
+            <strong>Huawei Solar</strong>
+            <span>Inverter FusionSolar & Storage</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon fluke"><i class="fas fa-shield-halved"></i></div>
+          <div class="marquee-text">
+            <strong>Fluke Networks</strong>
+            <span>Certificazione CCTT Rame/Fibra</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon prysmian"><i class="fas fa-bezier-curve"></i></div>
+          <div class="marquee-text">
+            <strong>Prysmian Group</strong>
+            <span>Cavi di Potenza & Dati CEI</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon bticino"><i class="fas fa-house-signal"></i></div>
+          <div class="marquee-text">
+            <strong>BTicino</strong>
+            <span>Domotica & Serie Civili Connesse</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon siemens"><i class="fas fa-industry"></i></div>
+          <div class="marquee-text">
+            <strong>Siemens</strong>
+            <span>Sistemi di Manovra & Distribuzione</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon gewiss"><i class="fas fa-plug-circle-bolt"></i></div>
+          <div class="marquee-text">
+            <strong>Gewiss</strong>
+            <span>Quadri Distribuzione & Canaline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplicate Track for Seamless 100% Infinite Loop -->
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-item">
+          <div class="marquee-icon schneider"><i class="fas fa-bolt"></i></div>
+          <div class="marquee-text">
+            <strong>Schneider Electric</strong>
+            <span>Quadristica & Interruttori BT/MT</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon abb"><i class="fas fa-network-wired"></i></div>
+          <div class="marquee-text">
+            <strong>ABB</strong>
+            <span>Automazione Industriale & Potenza</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon huawei"><i class="fas fa-solar-panel"></i></div>
+          <div class="marquee-text">
+            <strong>Huawei Solar</strong>
+            <span>Inverter FusionSolar & Storage</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon fluke"><i class="fas fa-shield-halved"></i></div>
+          <div class="marquee-text">
+            <strong>Fluke Networks</strong>
+            <span>Certificazione CCTT Rame/Fibra</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon prysmian"><i class="fas fa-bezier-curve"></i></div>
+          <div class="marquee-text">
+            <strong>Prysmian Group</strong>
+            <span>Cavi di Potenza & Dati CEI</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon bticino"><i class="fas fa-house-signal"></i></div>
+          <div class="marquee-text">
+            <strong>BTicino</strong>
+            <span>Domotica & Serie Civili Connesse</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon siemens"><i class="fas fa-industry"></i></div>
+          <div class="marquee-text">
+            <strong>Siemens</strong>
+            <span>Sistemi di Manovra & Distribuzione</span>
+          </div>
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-icon gewiss"><i class="fas fa-plug-circle-bolt"></i></div>
+          <div class="marquee-text">
+            <strong>Gewiss</strong>
+            <span>Quadri Distribuzione & Canaline</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- =========================================================================
@@ -2312,6 +2533,22 @@
     </div>
   </div>
 
+  <!-- MOBILE FLOATING ACTION BAR (QUICK CALL / WA / QUOTE) -->
+  <aside class="mobile-bottom-bar" id="mobile-bottom-bar" aria-label="Contatto rapido">
+    <a href="tel:+393298993363" class="mobile-bar-btn call" aria-label="Chiama ora">
+      <div class="bar-btn-icon"><i class="fas fa-phone-volume"></i></div>
+      <span>Chiama</span>
+    </a>
+    <a href="https://wa.me/393298993363" target="_blank" rel="noopener noreferrer" class="mobile-bar-btn whatsapp" aria-label="WhatsApp H24">
+      <div class="bar-btn-icon"><i class="fab fa-whatsapp"></i></div>
+      <span>WhatsApp</span>
+    </a>
+    <a href="#contatti" class="mobile-bar-btn quote" aria-label="Richiedi Preventivo">
+      <div class="bar-btn-icon"><i class="fas fa-calculator"></i></div>
+      <span>Preventivo</span>
+    </a>
+  </aside>
+
   <!-- FLOATING SECURITY ALERT TOAST -->
   <div id="securityToast" class="security-toast" role="alert" aria-live="polite">
     <div class="security-toast-icon"><i class="fas fa-lock"></i></div>
@@ -2321,6 +2558,6 @@
     </div>
   </div>
 
-  <script src="main.js?v=2.4.0"></script>
+  <script src="main.js?v=2.5.0"></script>
 </body>
 </html>

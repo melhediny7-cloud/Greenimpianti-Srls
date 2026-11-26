@@ -41,33 +41,136 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // --- 2. Mobile Menu Toggle ---
+  // --- 2. Theme Toggle (Dark Industrial / Light) ---
+  const initThemeToggle = () => {
+    const themeBtn = document.getElementById('theme-toggle');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    const mobileThemeLabel = document.querySelector('.mobile-theme-label');
+
+    const updateThemeUI = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (mobileThemeLabel) {
+        mobileThemeLabel.textContent = theme === 'light' ? 'Tema Chiaro' : 'Tema Scuro';
+      }
+    };
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || localStorage.getItem('green-theme') || 'dark';
+    updateThemeUI(currentTheme);
+
+    const toggleTheme = () => {
+      const active = document.documentElement.getAttribute('data-theme') || 'dark';
+      const nextTheme = active === 'dark' ? 'light' : 'dark';
+      updateThemeUI(nextTheme);
+      localStorage.setItem('green-theme', nextTheme);
+    };
+
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+    if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
+  };
+  initThemeToggle();
+
+  // --- 3. Enhanced Fullscreen Mobile Menu ---
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenuBackdrop = document.querySelector('.mobile-menu-backdrop');
 
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+  const openMobileMenu = () => {
+    if (!mobileMenu) return;
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMobileMenu = () => {
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (hamburger) {
       const spans = hamburger.querySelectorAll('span');
-      if (mobileMenu.classList.contains('open')) {
-        spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
-      } else {
-        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-      }
-    });
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  };
 
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        const spans = hamburger.querySelectorAll('span');
-        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-      });
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
     });
   }
 
-  // --- 3. Interactive Tabs: Chi Siamo ---
+  if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', closeMobileMenu);
+    });
+  }
+
+  // --- 4. Animated Scroll Counters ---
+  const initScrollCounters = () => {
+    const counterElements = document.querySelectorAll('.stat-number');
+    if (!counterElements.length) return;
+
+    const runCount = (el) => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1800;
+      const start = performance.now();
+
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const val = Math.floor(ease * target);
+        el.textContent = val + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = target + suffix;
+        }
+      };
+      requestAnimationFrame(step);
+    };
+
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    counterElements.forEach(el => obs.observe(el));
+  };
+  initScrollCounters();
+
+  // --- 5. Scroll-Triggered Reveal Animations ---
+  const initScrollReveal = () => {
+    const targets = document.querySelectorAll(
+      '.service-box, .valore-card, .pillar-card, .matrix-table-card, .partnership-card, .fluke-trust-card, .cert-card-item, .dossier-intro-box, .contact-info-panel, .contact-form-panel'
+    );
+    targets.forEach(el => el.classList.add('reveal-element'));
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(el => obs.observe(el));
+  };
+  initScrollReveal();
+
+  // --- 6. Interactive Tabs: Chi Siamo ---
   const aboutTabBtns = document.querySelectorAll('.about-tab-btn');
   const aboutTabPanes = document.querySelectorAll('.about-tab-pane');
 
@@ -412,6 +515,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastBoltTime = performance.now();
     let nextBoltDelay = 2200 + Math.random() * 2000;
 
+    let heroMouse = { x: -9999, y: -9999, active: false };
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      heroMouse.x = e.clientX - rect.left;
+      heroMouse.y = e.clientY - rect.top;
+      heroMouse.active = true;
+    }, { passive: true });
+    hero.addEventListener('mouseleave', () => {
+      heroMouse.active = false;
+    });
+
     // Interactive Strike when clicking or tapping anywhere in Hero area (even on cards or text)
     document.addEventListener('pointerdown', (e) => {
       if (!hero) return;
@@ -455,6 +569,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
+
+        // Interactive mouse connection and subtle energy displacement
+        if (heroMouse.active) {
+          const mdx = heroMouse.x - p.x;
+          const mdy = heroMouse.y - p.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < 140) {
+            const mAlpha = (1 - mdist / 140) * 0.45;
+            ctx.strokeStyle = `rgba(74, 222, 128, ${mAlpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(heroMouse.x, heroMouse.y);
+            ctx.stroke();
+            p.x -= (mdx / mdist) * 0.6;
+            p.y -= (mdy / mdist) * 0.6;
+          }
+        }
 
         const alpha = p.baseAlpha + Math.sin(p.pulse) * 0.15;
         ctx.fillStyle = p.color === '#4ade80' ? `rgba(74, 222, 128, ${alpha})` : `rgba(245, 158, 11, ${alpha})`;
