@@ -1183,10 +1183,206 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // =========================================================================
+  // FAQ ACCORDION HANDLER
+  // =========================================================================
+  function initFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems.length) return;
+
+    faqItems.forEach((item, index) => {
+      const questionBtn = item.querySelector('.faq-question');
+      if (!questionBtn) return;
+
+      // Open the first FAQ item by default on larger screens
+      if (index === 0 && window.innerWidth > 768) {
+        item.classList.add('active');
+        questionBtn.setAttribute('aria-expanded', 'true');
+      }
+
+      questionBtn.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close other items for smooth accordion flow
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+            const otherBtn = otherItem.querySelector('.faq-question');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Toggle clicked item
+        if (isActive) {
+          item.classList.remove('active');
+          questionBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('active');
+          questionBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  // =========================================================================
+  // TESTIMONIALS TRUST CAROUSEL
+  // =========================================================================
+  function initTestimonialsSlider() {
+    const track = document.getElementById('testimonials-track');
+    const prevBtn = document.getElementById('testi-prev');
+    const nextBtn = document.getElementById('testi-next');
+    const dotsWrap = document.getElementById('testi-dots');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.testimonial-card');
+    if (!cards.length) return;
+
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+
+    function getCardsPerView() {
+      return window.innerWidth > 1024 ? 2 : 1;
+    }
+
+    function getMaxIndex() {
+      const perView = getCardsPerView();
+      return Math.max(0, cards.length - perView);
+    }
+
+    function renderDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      const maxIdx = getMaxIndex();
+      for (let i = 0; i <= maxIdx; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'testi-dot' + (i === currentIndex ? ' active' : '');
+        dot.setAttribute('aria-label', `Vai alla recensione ${i + 1}`);
+        dot.addEventListener('click', () => {
+          goToSlide(i);
+          resetAutoPlay();
+        });
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function updateSlider() {
+      const maxIdx = getMaxIndex();
+      if (currentIndex > maxIdx) currentIndex = maxIdx;
+      if (currentIndex < 0) currentIndex = 0;
+
+      const cardWidth = cards[0].offsetWidth;
+      const gap = 24;
+      const offset = currentIndex * (cardWidth + gap);
+      track.style.transform = `translateX(-${offset}px)`;
+
+      if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+      if (nextBtn) nextBtn.disabled = (currentIndex >= maxIdx);
+
+      if (dotsWrap) {
+        const dots = dotsWrap.querySelectorAll('.testi-dot');
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+      }
+    }
+
+    function goToSlide(idx) {
+      currentIndex = idx;
+      updateSlider();
+    }
+
+    function nextSlide() {
+      const maxIdx = getMaxIndex();
+      if (currentIndex < maxIdx) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      updateSlider();
+    }
+
+    function prevSlide() {
+      const maxIdx = getMaxIndex();
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = maxIdx;
+      }
+      updateSlider();
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoPlay();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoPlay();
+      });
+    }
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchEndX - touchStartX;
+      if (Math.abs(swipeDistance) > 40) {
+        if (swipeDistance < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        resetAutoPlay();
+      }
+    }, { passive: true });
+
+    // Auto Play (every 6.5s)
+    function startAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(nextSlide, 6500);
+    }
+
+    function resetAutoPlay() {
+      startAutoPlay();
+    }
+
+    track.addEventListener('mouseenter', () => {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+    });
+    track.addEventListener('mouseleave', () => {
+      startAutoPlay();
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        renderDots();
+        updateSlider();
+      }, 150);
+    });
+
+    renderDots();
+    updateSlider();
+    startAutoPlay();
+  }
+
   // Initialize atmospheric background and interactive electric effects
   initLightningBackground();
   initElectricTouchAndClickSparks();
   initHeroBackgroundVideo();
   initCertificatesAndSecurity();
+  initFaqAccordion();
+  initTestimonialsSlider();
 
 });
